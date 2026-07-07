@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    {{#each project.plugins}}
+    id '{{this}}'
+    {{/each}}
+}
+
+android {
+    {{#if packageName}}
+    namespace '{{packageName}}'
+    {{else}}
+    namespace 'cn.uvuejs.unix.modules'
+    {{/if}}
+    compileSdk 35
+
+    defaultConfig {
+        {{#if minSdkVersion}}
+        minSdk {{minSdkVersion}}
+        {{else}}
+        minSdk 21
+        {{/if}}
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    compileOnly fileTree(include: ['*.aar', '*.jar'], dir: '../app/libs')
+    compileOnly fileTree(include: ['*.aar', '*.jar'], dir: './libs')
+    compileOnly fileTree(include: ['*.aar', '*.jar'], dir: '../uniappx/libs')
+    {{#each dependencies.compileOnly}}
+    compileOnly '{{this}}'
+    {{/each}}
+    {{#each dependencies.scopedDefault}}
+    {{scope}} '{{value}}'
+    {{/each}}
+    {{#each dependencies.project}}
+    implementation project('{{this}}')
+    {{/each}}
+}

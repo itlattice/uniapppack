@@ -1,0 +1,47 @@
+stages:
+    - install
+    - deploy
+
+cache:
+  paths:
+    - node_modules
+
+install-staging:dep:
+    stage: install
+    only:
+        - main
+    script:
+        - echo "=====cat node/npm======"
+        - nvm use 20
+        - nrm use taobao
+        - npm -v
+        - node -v
+        - echo "=====start install======"
+        - npm install --registry=https://registry.npmmirror.com
+        - echo "=====end install======"
+    artifacts: # 将这个job生成的依赖传递给下一个job。需要设置dependencies
+      expire_in: 1 week
+
+deploy-staging:dep:
+    stage: deploy
+    only:
+        - main
+    script:
+        - echo "=====start build======"
+        - npm run electron:generate-icons
+        - ren .env.production .env
+        - npm run electron:build # 将项目打包
+        - echo "=====end build======"
+        - echo "=====start deploy======"
+        - mkdir server_dist
+        - cp dist_electron/casher_setup.exe server_dist/casher_setup.exe
+        - cp dist_electron/win-unpacked/resources.pak server_dist/resources.pak
+        - cp dist_electron/latest.yml server_dist/latest.yml
+        - cp dist_electron/win-unpacked/casher.exe server_dist/casher.exe
+        - cp -r dist_electron/win-unpacked/resources server_dist/resources
+        - 7z a release.zip server_dist
+        - echo "=====end deploy!!!!!!======"
+    artifacts: # 将这个job生成的依赖传递给下一个job。需要设置dependencies
+      expire_in: 1 week # artifacets 的过期时间，因为这些数据都是直接保存在 Gitlab 机器上的，过于久远的资源就可以删除掉了
+      paths:
+        - release.zip

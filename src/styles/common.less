@@ -1,0 +1,125 @@
+@import "theme";
+@import "global";
+
+.position-fixed{
+  position: fixed;
+}
+.position-relative{
+  position: relative;
+}
+.position-absolute{
+  position: absolute;
+}
+.full-width{
+  width: 100%;
+}
+.full-height{
+    height: 100%;
+}
+.full{
+    width: 100%;
+    height: 100%;
+}
+.float-right{
+  float: right;
+}
+.text-center{
+  text-align: center;
+}
+.font-bold{
+  font-weight: 700;
+}
+.scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.row-flex{
+  display: flex;
+  flex-wrap: wrap;
+}
+.scroll-y {
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.align-right{
+  text-align: right;
+}
+.back-gray-card{
+  border-radius: 6px;
+  background: #F4F8FB;
+}
+.background-white{
+  background: #fff;
+}
+.background-main{
+  background: @main-color;
+}
+.color-white{
+  color: #fff;
+}
+.unselectable {
+  /* 核心属性：禁止用户选择文本 */
+  user-select: none;
+  /* 兼容旧版浏览器/内核的前缀（可选，Electron基于Chrome，新版可省略） */
+  -webkit-user-select: none; /* Webkit内核（Chrome/Safari/Electron） */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+}
+.drag-region {
+  -webkit-app-region: drag;
+  pointer-events: auto;
+}
+
+/* 交互元素需要设置为不可拖动 */
+.drag-region button,
+.drag-region input,
+.drag-region select,
+.drag-region textarea{
+  -webkit-app-region: no-drag;
+}
+
+.drag-region .no-drag {
+  -webkit-app-region: no-drag;
+  pointer-events: auto !important;
+}
+.display-warp{
+  display: flex;
+  flex-wrap:wrap;
+}
+button{
+  cursor: pointer;
+}
+.display-flex{
+  display: flex;
+}
+.radius{
+  border-radius: 50px;
+}
+.justify-space-between{
+  justify-content: space-between;
+  display: flex;
+}
+.text-overline{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.text-line-2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+.overflow-hidden{
+  overflow: hidden;
+}
+.pointer{
+  cursor: pointer;
+}

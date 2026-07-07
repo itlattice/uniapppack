@@ -1,0 +1,159 @@
+{
+  "name": "uniapppack",
+  "version": "0.0.5",
+  "apiversion": 1,
+  "private": true,
+  "author": "itlattice",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "chcp 65001 && vite",
+    "build": "chcp 65001 && vite build",
+    "preview": "chcp 65001 && vite preview",
+    "format": "chcp 65001 && prettier --write --experimental-cli src/",
+    "electron:dev": "chcp 65001 && cross-env NODE_ENV=development vite",
+    "electron:build": "chcp 65001 && vite build && electron-builder",
+    "electron:generate-icons": "electron-icon-builder --input=public/icon.png --output=build --flatten",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.11",
+    "adm-zip": "^0.5.16",
+    "ansi-colors": "^4.1.3",
+    "axios": "^1.14.0",
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.12.0",
+    "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.4.5",
+    "downloadjs": "^1.4.7",
+    "electron-edge-js": "^41.0.0",
+    "electron-icon-builder": "^2.0.1",
+    "electron-updater": "^6.8.3",
+    "element-plus": "^2.13.6",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^11.3.2",
+    "glob": "^11.0.0",
+    "handlebars": "^4.7.8",
+    "iconv-lite": "^0.6.3",
+    "is-base64": "^1.1.0",
+    "js-base64": "^3.7.8",
+    "jsencrypt": "^3.5.4",
+    "json5": "^2.2.3",
+    "less": "^4.6.4",
+    "less-loader": "^12.3.2",
+    "moment": "^2.30.1",
+    "path": "^0.12.7",
+    "pinia": "^3.0.4",
+    "raw-loader": "^4.0.2",
+    "rimraf": "^5.0.7",
+    "shelljs": "^0.8.5",
+    "sound-play": "^1.1.0",
+    "spectron": "^19.0.0",
+    "sqlite3": "^6.0.1",
+    "svg-sprite-loader": "^6.0.11",
+    "svgo": "^4.0.1",
+    "svgo-loader": "^5.0.0",
+    "tiny-emitter": "^2.1.0",
+    "underscore": "^1.13.8",
+    "unzipper": "^0.12.1",
+    "url-parse": "^1.5.10",
+    "uuid": "^13.0.0",
+    "vue": "^3.5.31",
+    "vue-cli-plugin-electron-builder": "^2.1.1",
+    "vue-router": "^5.0.4",
+    "winston": "^3.13.0",
+    "xml-formatter": "^3.6.7",
+    "xmldom": "^0.6.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^8.0.1",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "autoprefixer": "^10.4.27",
+    "cross-env": "^10.1.0",
+    "electron": "^41.1.1",
+    "electron-builder": "^26.8.1",
+    "esbuild": "^0.27.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "lodash": "^4.18.1",
+    "postcss": "^8.5.8",
+    "postcss-pxtorem": "^6.1.0",
+    "prettier": "^3.8.1",
+    "vite": "^8.0.3",
+    "vite-plugin-electron": "^0.29.1",
+    "vite-plugin-electron-renderer": "^0.14.6",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-static-copy": "^3.4.0",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-vue-devtools": "^8.1.1",
+    "wait-on": "^9.0.4"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "build": {
+    "electronLanguages": [
+      "zh-CN"
+    ],
+    "productName": "uniapppack",
+    "appId": "com.fresh365.market",
+    "copyright": "@copy 2015-2024 fresh365.cn 版权所有",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "public/resources",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "./public/resources",
+        "to": "./"
+      }
+    ],
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icons/icon.ico",
+      "uninstallerIcon": "build/icons/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "UniAPP打包机",
+      "runAfterFinish": true
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://cash.fresh361.com/electron/"
+      }
+    ],
+    "asar": true,
+    "win": {
+      "icon": "build/icons/icon.ico",
+      "requestedExecutionLevel": "highestAvailable",
+      "artifactName": "${productName}_setup.${ext}",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  },
+  "jest": {
+    "preset": "@vue/cli-plugin-unit-jest"
+  },
+  "//browserslist说明": "@PC & @H5",
+  "//dependencies说明": "@H5: vconsole; @H5.vant: vant",
+  "//devDependencies说明": "@H5: postcss-pxtorem",
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx,json,css,scss,html,md}": [
+      "prettier --write"
+    ]
+  }
+}

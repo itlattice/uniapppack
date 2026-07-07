@@ -1,0 +1,85 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.DS_Store
+dist
+dist-ssr
+coverage
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+*.tsbuildinfo
+
+.eslintcache
+
+# Cypress
+/cypress/videos/
+/cypress/screenshots/
+
+# Vitest
+__screenshots__/
+
+# Vite
+*.timestamp-*-*.mjs
+dist_electron
+dist-electron
+
+
+.DS_Store
+node_modules
+/dist
+/TODO.local.md
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sw?
+
+#Electron-builder output
+/dist_electron
+package-lock.json
+
+*.dll.config
+*.exe.config
+*.pdb
+*.cache
+Newtonsoft.Json.xml
+version
+public/resources/license
+bin/Debug
+bin/Release
+*.suo
+obj/Debug
+lib/license/license/obj/Debug/
+lib/updater/updater/obj/Debug/
+.vscode
+.vs
