@@ -1,6 +1,7 @@
 import { initIpcBasicHandlers } from './basic'
 import { initIpcConfigHandlers } from './config'
 import { initUniappxPackHandlers } from './uniappxPack'
+import { initUniappPackHandlers } from './uniappPack'
 import {shell} from "electron";
 
 // 外部依赖的变量/方法
@@ -35,6 +36,7 @@ function registerAllHandlers() {
       mainWin: mainWindow,
     })
     initUniappxPackHandlers()
+    initUniappPackHandlers()
   } catch (e) {
     console.error(e)
   }

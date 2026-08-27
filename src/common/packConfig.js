@@ -5,10 +5,8 @@ import {$insertDB, $queryDB, $runSql} from "@/utils/sqlitecommon";
 
 export async function $checkSubjectPath(path){
     /**
-     * 检测APPID以获取数据位置包
-     * 检测是否有离线本地包可用
-     * 根据本地目录地址加载缓存的配置数据
-     *  无配置数据的，检测根目录是否有keystore文件
+     * 检测 APPID、读取本地发行资源，并加载缓存的项目配置。
+     * 现同时支持 Android / iOS 资源探测，避免把 app-android 作为唯一前置条件。
      */
     var manifestJsonFile=path+'/manifest.json';
     if(!(await $fileExists(manifestJsonFile))){
@@ -18,18 +16,24 @@ export async function $checkSubjectPath(path){
     var manifestJson=await $readFile(manifestJsonFile);
     var manifest=JSON5.parse(manifestJson);
     console.log(manifest);
+    var androidPath=path+'/unpackage\\resources\\app-android';
+    var iosPath=path+'/unpackage\\resources\\app-ios';
+    var hasAndroidResources=await $pathExists(androidPath);
+    var hasIosResources=await $pathExists(iosPath);
+    if(!hasAndroidResources&&!hasIosResources){
+        $toastError("请先在HBuilderX生成本地打包资源");
+        return  false;
+    }
     var result={
         name:manifest.name,
         appid:manifest.appid,
         description:manifest.description,
         versionName:manifest.versionName,
         versionCode:manifest.versionCode,
-    }
-    // G:\market\pdaapp\unpackage\resources\app-android
-    var androidPath=path+'/unpackage\\resources\\app-android';
-    if(!(await $pathExists(androidPath))){
-        $toastError("请先进行本地打包");
-        return  false;
+        resources:{
+            android:hasAndroidResources,
+            ios:hasIosResources
+        }
     }
     var config=await $queryDB("select * from subject where path='"+path+"'");
     console.log(config);
@@ -44,14 +48,21 @@ export async function $checkSubjectPath(path){
     if(configData===undefined||configData==null){
         return result;
     }
-    if(configData.android==undefined||configData.android.androidKeystore==undefined){
-        return result;
+    configData.resources={
+        android:hasAndroidResources,
+        ios:hasIosResources
     }
-    var keystoreFile=configData.android.androidKeystore;
-    if(!(await $fileExists(keystoreFile))){
-        return result;
+    if(configData.android&&configData.android.androidKeystore){
+        var keystoreFile=configData.android.androidKeystore;
+        if(!(await $fileExists(keystoreFile))){
+            delete configData.android.androidKeystore;
+        }
     }
-    return configData;
+    return {
+        ...result,
+        ...configData,
+        resources:configData.resources
+    };
 }
 
 export async function $setSubjectConfig(path,config){
@@ -75,6 +86,7 @@ export async function $checkAndroidConfig(){
     var config=await $readConfig();
     console.log(config);
     if(config.hbuildPath==undefined||config.hbuildPath==''||
+      config.packPath==undefined||config.packPath==''||
       config.uniAndroidSDK==undefined||config.uniAndroidSDK==''||
       config.uniAndroidSDKVersion==undefined||config.uniAndroidSDKVersion==''||
       config.JDKPath==undefined||config.JDKPath==''||
@@ -88,8 +100,23 @@ export async function $checkAndroidConfig(){
     return config;
 }
 
+export async function $checkIosConfig(){
+    var config=await $readConfig();
+    console.log(config);
+    if(config.hbuildPath==undefined||config.hbuildPath==''||
+      config.packPath==undefined||config.packPath==''||
+      config.uniIosSDK==undefined||config.uniIosSDK==''||
+      config.uniIosSDKVersion==undefined||config.uniIosSDKVersion==''
+    ){
+        return false;
+    }
+
+    return config;
+}
+
 export default {
     $checkSubjectPath,
     $checkAndroidConfig,
+    $checkIosConfig,
     $setSubjectConfig
 }

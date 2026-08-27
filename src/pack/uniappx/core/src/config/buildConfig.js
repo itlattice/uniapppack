@@ -34,9 +34,25 @@ function getBaseBuildConfig () {
 		buildFeatures: {
 			buildConfig: false
 		},
-		nativeLibs: {
-			pickFirsts: []
+		// 仅在 manifest 显式提供时写入额外 feature；模板按 entries 输出，避免无配置时改变现有 gradle
+		buildFeatureEntries: [],
+		aaptOptions: {
+			additionalParameters: ['--auto-add-overlay'],
+			ignoreAssetsPattern: '!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~',
+			noCompress: []
 		},
+		nativeLibs: {
+			pickFirsts: [],
+			excludes: [],
+			merges: [],
+			doNotStrips: []
+		},
+		packaging: {
+			// undefined = 不输出 packaging.jniLibs；true/false = 显式输出 useLegacyPackaging
+			jniLibsUseLegacyPackaging: undefined
+		},
+		packagingHasJniLibs: false,
+		hasPackagingOptions: false,
 		bundle: false,
 		defaultConfig: {
 			buildConfigField: [],

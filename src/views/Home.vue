@@ -91,7 +91,159 @@
         </el-tab-pane>
         <el-tab-pane label="iOS">
           <div class="packpage background-white content-scroll position-relative">
-
+            <div class="formitem display-flex" style="height: 50px;">
+              <div class="label unselectable">项目地址</div>
+              <div class="input">
+                <input type="text" readonly placeholder="选择项目所在位置" class="cash-input inputbox" v-model="subjectPath" />
+                <div class="tips">请先在 HBuilderX 生成 iOS 本地打包资源，打包机将基于 app-ios 资源生成原生工程</div>
+              </div>
+              <button class="cash-btn selectbtn" @click="chooseSubjectPath">选择文件夹</button>
+              <div style="height: 32px">
+                <el-radio-group v-model="packType" :options="packTypeOptions" :props="props" />
+              </div>
+            </div>
+            <div class="formdata">
+              <div class="form-line display-flex">
+                <div class="formitem display-flex">
+                  <div class="label">Bundle ID</div>
+                  <div class="packinput" style="width: 300px">
+                    <input type="text" placeholder="iOS Bundle ID" v-model="iosBundleId" style="width: 300px" class="cash-input inputbox" />
+                  </div>
+                </div>
+                <div class="formitem display-flex">
+                  <div class="label">渠道</div>
+                  <div class="packinput">
+                    <input type="text" v-model="iosChannel" placeholder="默认 appstore" class="cash-input inputbox" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-line display-flex">
+                <div class="formitem display-flex">
+                  <div class="label">广告联盟ID</div>
+                  <div class="packinput" style="width: 300px">
+                    <input type="text" v-model="iosUnionid" style="width: 300px" placeholder="可选，不开通 uniad 可留空" class="cash-input inputbox" />
+                  </div>
+                </div>
+                <div class="formitem display-flex">
+                  <div class="label">隐私弹窗</div>
+                  <div class="packinput" style="margin-top: -4px;">
+                    <el-radio-group v-model="iosInitPrivacyAuthorization" :options="iosPrivacyOptions" :props="props" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-line display-flex">
+                <div class="formitem display-flex" style="width: 100%; align-items: flex-start;">
+                  <div class="label">说明</div>
+                  <div class="packinput" style="width: 580px">
+                    <div class="tips" style="position: static; color: #666; line-height: 22px;">
+                      当前版本仅生成 iOS 原生工程并打开目录，不执行 Xcode 编译、签名和 IPA 导出。
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="cash-btn packbtn" @click="iosPackStart">生成工程</button>
+            </div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+    <div class="page" v-if="pageTab=='uniapp'">
+      <el-tabs type="border-card">
+        <el-tab-pane label="Android">
+          <div class="packpage background-white content-scroll position-relative">
+            <div class="formitem display-flex" style="height: 50px;">
+              <div class="label unselectable">项目地址</div>
+              <div class="input">
+                <input type="text" readonly placeholder="选择项目所在位置" class="cash-input inputbox" v-model="subjectPath" />
+                <div class="tips">请先进行本地打包，打包机将基于本地打包文件进行整合</div>
+              </div>
+              <button class="cash-btn selectbtn" @click="chooseSubjectPath">选择文件夹</button>
+              <div style="height: 32px">
+                <el-radio-group v-model="packType" :options="packTypeOptions" :props="props" />
+              </div>
+            </div>
+            <div class="formdata">
+              <div class="form-line display-flex">
+                <div class="formitem display-flex">
+                  <div class="label">包名</div>
+                  <div class="packinput" style="width: 300px">
+                    <input type="text" placeholder="安卓包名" v-model="androidPackName" style="width: 300px" class="cash-input inputbox" />
+                  </div>
+                </div>
+                <div class="formitem display-flex">
+                  <div class="label">证书类型</div>
+                  <div class="packinput" style="margin-top: -4px;">
+                    <el-radio-group v-model="keyType" :options="keyTypeOptions" :props="props" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-line display-flex">
+                <div class="formitem display-flex">
+                  <div class="label">证书文件</div>
+                  <div class="packinput" style="width: 230px">
+                    <input type="text" v-model="androidKeystore" readonly style="width: 220px" placeholder="证书文件" class="cash-input inputbox" />
+                  </div>
+                  <button class="cash-btn selectbtn" @click="chooseSubjectAndroidKeystore">选择文件</button>
+                </div>
+                <div class="formitem display-flex">
+                  <div class="label">证书别名</div>
+                  <div class="packinput">
+                    <input type="text" v-model="androidKeyAlias" placeholder="证书别名" class="cash-input inputbox" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-line display-flex">
+                <div class="formitem display-flex">
+                  <div class="label">证书库密码</div>
+                  <div class="packinput"  style="width: 300px">
+                    <input type="text" v-model="androidKeyPassword" style="width: 300px" placeholder="证书库密码" class="cash-input inputbox" />
+                  </div>
+                </div>
+                <div class="formitem display-flex">
+                  <div class="label">证书密码</div>
+                  <div class="packinput">
+                    <input type="text" v-model="androidKeyPwd" placeholder="证书密码" class="cash-input inputbox" />
+                  </div>
+                </div>
+              </div>
+              <button class="cash-btn packbtn" @click="androidPackStartUniapp">打包</button>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="iOS">
+          <div class="packpage background-white content-scroll position-relative">
+            <div class="formitem display-flex" style="height: 50px;">
+              <div class="label unselectable">项目地址</div>
+              <div class="input">
+                <input type="text" readonly placeholder="选择项目所在位置" class="cash-input inputbox" v-model="subjectPath" />
+                <div class="tips">请先在 HBuilderX 生成 iOS 本地打包资源</div>
+              </div>
+              <button class="cash-btn selectbtn" @click="chooseSubjectPath">选择文件夹</button>
+              <div style="height: 32px">
+                <el-radio-group v-model="packType" :options="packTypeOptions" :props="props" />
+              </div>
+            </div>
+            <div class="formdata">
+              <div class="form-line display-flex">
+                <div class="formitem display-flex">
+                  <div class="label">Bundle ID</div>
+                  <div class="packinput" style="width: 300px">
+                    <input type="text" placeholder="iOS Bundle ID" v-model="iosBundleId" style="width: 300px" class="cash-input inputbox" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-line display-flex">
+                <div class="formitem display-flex" style="width: 100%; align-items: flex-start;">
+                  <div class="label">说明</div>
+                  <div class="packinput" style="width: 580px">
+                    <div class="tips" style="position: static; color: #666; line-height: 22px;">
+                      传统 uni-app 仅生成 iOS 原生工程并打开目录，不执行 Xcode 编译、签名和 IPA 导出。
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="cash-btn packbtn" @click="iosPackStartUniapp">生成工程</button>
+            </div>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -108,7 +260,7 @@
 <script setup>
 import {onMounted, ref} from 'vue'
 import {$chooseFile, $choosePath} from "@/common/file";
-import {$checkAndroidConfig, $checkSubjectPath, $setSubjectConfig} from "@/common/packConfig";
+import {$checkAndroidConfig, $checkIosConfig, $checkSubjectPath, $setSubjectConfig} from "@/common/packConfig";
 import {$hideLoading, $showLoading, $toastError,$showConfirm} from "@/common/common";
 import {handleClick} from '@/common/Home'
 
@@ -130,6 +282,16 @@ const packTypeOptions = [
     name: '正式打包',
   }
 ]
+const iosPrivacyOptions = [
+  {
+    id: true,
+    name: '默认同意',
+  },
+  {
+    id: false,
+    name: '不默认同意',
+  }
+]
 const showPackWindow=ref(false)
 const showConfigWindow=ref(false)
 
@@ -149,7 +311,10 @@ const androidKeystore=ref('');  //安卓证书文件
 const androidKeyAlias=ref('');  //安卓证书别名
 const androidKeyPassword=ref('');  //安卓证书库密码
 const androidKeyPwd=ref(''); //安卓证书密码
-const androidNativeLibPickFirsts=ref(''); // 原生库冲突 pickFirst 配置
+const iosBundleId=ref('');
+const iosChannel=ref('appstore');
+const iosUnionid=ref('');
+const iosInitPrivacyAuthorization=ref(true);
 
 const parseNativeLibPickFirsts = (value) => {
   return String(value || '')
@@ -166,14 +331,32 @@ const readSubjectConfig=async (path)=>{
   console.log(subject);
   subjectBasicData.value=subject;
   if(!subject.android){
-    return false;
+    androidPackName.value='';
+    androidKeystore.value='';
+    androidKeyAlias.value='';
+    androidKeyPassword.value='';
+    androidKeyPwd.value='';
+    androidNativeLibPickFirsts.value='';
+  } else {
+    androidPackName.value=subject.android.androidPackName;
+    androidKeystore.value=subject.android.androidKeystore;
+    androidKeyAlias.value=subject.android.androidKeyAlias;
+    androidKeyPassword.value=subject.android.androidKeyPassword;
+    androidKeyPwd.value=subject.android.androidKeyPwd;
+    androidNativeLibPickFirsts.value=(subject.android.nativeLibPickFirsts || []).join(', ');
   }
-  androidPackName.value=subject.android.androidPackName;
-  androidKeystore.value=subject.android.androidKeystore;
-  androidKeyAlias.value=subject.android.androidKeyAlias;
-  androidKeyPassword.value=subject.android.androidKeyPassword;
-  androidKeyPwd.value=subject.android.androidKeyPwd;
-  androidNativeLibPickFirsts.value=(subject.android.nativeLibPickFirsts || []).join(', ');
+  if(!subject.ios){
+    iosBundleId.value='';
+    iosChannel.value='appstore';
+    iosUnionid.value='';
+    iosInitPrivacyAuthorization.value=true;
+    return true;
+  }
+  iosBundleId.value=subject.ios.iosBundleId || '';
+  iosChannel.value=subject.ios.iosChannel || 'appstore';
+  iosUnionid.value=subject.ios.iosUnionid || '';
+  iosInitPrivacyAuthorization.value=subject.ios.initPrivacyAuthorization !== false;
+  return true;
 }
 
 const chooseSubjectAndroidKeystore=async ()=>{
@@ -196,6 +379,7 @@ const chooseSubjectPath=async ()=>{
 }
 
 const androidPackStart=async ()=>{
+  subjectBasicData.value.packPlatform='android'
   subjectBasicData.value.android={
     path:subjectPath.value,
     packType:packType.value,
@@ -231,6 +415,114 @@ const androidPackStart=async ()=>{
   $hideLoading(loading);
   packRef.value?.startPack();
 }
+const iosPackStart=async ()=>{
+  if(subjectPath.value==''){
+    $toastError('请选择项目位置');
+    return false;
+  }
+  if(iosBundleId.value==''){
+    $toastError('请输入 iOS Bundle ID');
+    return false;
+  }
+  if(subjectBasicData.value.resources && subjectBasicData.value.resources.ios===false){
+    $toastError('当前项目缺少 iOS 本地打包资源，请先在 HBuilderX 生成 app-ios 资源');
+    return false;
+  }
+  subjectBasicData.value.packPlatform='ios'
+  subjectBasicData.value.ios={
+    path:subjectPath.value,
+    packType:packType.value,
+    iosBundleId:iosBundleId.value,
+    iosChannel:iosChannel.value||'appstore',
+    iosUnionid:iosUnionid.value,
+    initPrivacyAuthorization:iosInitPrivacyAuthorization.value
+  }
+  var loading=$showLoading('生成 iOS 工程中，请稍等');
+  $setSubjectConfig(subjectPath.value,subjectBasicData.value);
+  console.log(subjectBasicData.value);
+  var check=await $checkIosConfig();
+  if(!check){
+    $toastError("请先完成 iOS 打包环境配置")
+    $hideLoading(loading)
+    return false;
+  }
+  showPackWindow.value=true;
+  $hideLoading(loading);
+  packRef.value?.startPack();
+}
+
+const androidPackStartUniapp=async ()=>{
+  subjectBasicData.value.packPlatform='android'
+  subjectBasicData.value.appType='uniapp'
+  subjectBasicData.value.android={
+    path:subjectPath.value,
+    packType:packType.value,
+    androidPackName:androidPackName.value,
+    androidKeystore:androidKeystore.value,
+    androidKeyAlias:androidKeyAlias.value,
+    androidKeyPassword:androidKeyPassword.value,
+    androidKeyPwd:androidKeyPwd.value
+  }
+  if(subjectPath.value==''){
+    $toastError('请选择项目位置');
+    return false;
+  }
+  if(androidPackName.value==''){
+    $toastError('请输入安卓包名');
+    return false;
+  }
+  if(androidKeystore.value==''||androidKeyAlias.value==''||androidKeyPassword.value==''||androidKeyPwd.value==''){
+    $toastError('请完善安卓证书信息');
+    return false;
+  }
+  var loading=$showLoading('打包中，请稍等');
+  $setSubjectConfig(subjectPath.value,subjectBasicData.value);
+  console.log(subjectBasicData.value);
+  var check=await $checkAndroidConfig();
+  if(!check){
+    $toastError("请先完成Android打包环境配置")
+    $hideLoading(loading)
+    return false;
+  }
+  showPackWindow.value=true;
+  $hideLoading(loading);
+  packRef.value?.startPack();
+}
+
+const iosPackStartUniapp=async ()=>{
+  if(subjectPath.value==''){
+    $toastError('请选择项目位置');
+    return false;
+  }
+  if(iosBundleId.value==''){
+    $toastError('请输入 iOS Bundle ID');
+    return false;
+  }
+  if(subjectBasicData.value.resources && subjectBasicData.value.resources.ios===false){
+    $toastError('当前项目缺少 iOS 本地打包资源，请先在 HBuilderX 生成资源');
+    return false;
+  }
+  subjectBasicData.value.packPlatform='ios'
+  subjectBasicData.value.appType='uniapp'
+  subjectBasicData.value.ios={
+    path:subjectPath.value,
+    packType:packType.value,
+    iosBundleId:iosBundleId.value
+  }
+  var loading=$showLoading('生成 iOS 工程中，请稍等');
+  $setSubjectConfig(subjectPath.value,subjectBasicData.value);
+  console.log(subjectBasicData.value);
+  var check=await $checkIosConfig();
+  if(!check){
+    $toastError("请先完成 iOS 打包环境配置")
+    $hideLoading(loading)
+    return false;
+  }
+  showPackWindow.value=true;
+  $hideLoading(loading);
+  packRef.value?.startPack();
+}
+
 const Config=()=>{
   showConfigWindow.value=true;
 }

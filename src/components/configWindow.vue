@@ -79,6 +79,35 @@
             </div>
           </div>
         </el-tab-pane>
+        <el-tab-pane label="iOS配置">
+          <div class="formdata">
+            <div class="formline display-flex" style="height: 50px;margin-top: 10px;">
+              <div class="formitem display-flex">
+                <div class="label unselectable">iOS离线SDK地址</div>
+                <div class="inputbox">
+                  <input type="text" v-model="uniIosSDK" readonly placeholder="离线SDK地址" class="cash-input input" />
+                  <div class="tips">下载完毕后解压后把解压后的文件夹放置于此，<a href="https://doc.dcloud.net.cn/uni-app-x/native/download/ios.html" target="_blank">下载地址</a></div>
+                </div>
+                <button class="cash-btn selectbtn" @click="chooseUniIosSDK">选择位置</button>
+              </div>
+              <div class="formitem display-flex">
+                <div class="label unselectable" style="width: 50px">版本号</div>
+                <div class="inputbox" style="width: 100px;">
+                  <input type="text" placeholder="SDK版本号" v-model="uniIosSDKVersion" style="width: 100px;" class="cash-input input" />
+                </div>
+              </div>
+            </div>
+            <div class="formline display-flex">
+              <div class="formitem display-flex">
+                <div class="label unselectable">Xcode路径</div>
+                <div class="inputbox">
+                  <input type="text" v-model="XcodePath" readonly placeholder="Xcode路径（可选）" class="cash-input input" />
+                </div>
+                <button class="cash-btn selectbtn" @click="chooseXcodePath">选择位置</button>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
       </el-tabs>
       <button class="cash-btn confirmbtn position-absolute" @click="confirmConfig">确认</button>
     </div>
@@ -105,6 +134,9 @@ const AndroidSDK=ref('')
 const JDKPath=ref('')
 const GradlePath=ref('')
 const AndroidStudio=ref('')
+const uniIosSDK=ref('')
+const uniIosSDKVersion=ref('')
+const XcodePath=ref('')
 
 const emit=defineEmits(['update:show','close'])
 
@@ -122,6 +154,9 @@ const showWindow= async ()=>{
   JDKPath.value=config.JDKPath||'';
   GradlePath.value=config.GradlePath||'';
   AndroidStudio.value=config.AndroidStudio||'';
+  uniIosSDK.value=config.uniIosSDK||'';
+  uniIosSDKVersion.value=config.uniIosSDKVersion||'';
+  XcodePath.value=config.XcodePath||'';
 }
 
 const hideWindow=()=>{
@@ -133,6 +168,9 @@ const hideWindow=()=>{
   JDKPath.value=""
   GradlePath.value=""
   AndroidStudio.value=""
+  uniIosSDK.value=""
+  uniIosSDKVersion.value=""
+  XcodePath.value=""
 }
 
 const closeWindow=()=>{
@@ -193,6 +231,23 @@ const chooseAndroidStudio=async ()=>{
   AndroidStudio.value=path;
 }
 
+const chooseUniIosSDK=async ()=>{
+  let path=await $choosePath();
+  if(!path) return ;
+  uniIosSDK.value=path;
+  const versionMatch = path.match(/(\d+\.\d+)/);
+  if (versionMatch) {
+    console.log('识别的iOS SDK版本号:', versionMatch[1]);
+    uniIosSDKVersion.value=versionMatch[1];
+  }
+}
+
+const chooseXcodePath=async ()=>{
+  let path=await $choosePath();
+  if(!path) return ;
+  XcodePath.value=path;
+}
+
 const confirmConfig=async ()=>{
   var config={
     hbuildPath:hbuildPath.value,
@@ -202,7 +257,10 @@ const confirmConfig=async ()=>{
     JDKPath:JDKPath.value,
     AndroidSDK:AndroidSDK.value,
     GradlePath:GradlePath.value,
-    AndroidStudio:AndroidStudio.value
+    AndroidStudio:AndroidStudio.value,
+    uniIosSDK:uniIosSDK.value,
+    uniIosSDKVersion:uniIosSDKVersion.value,
+    XcodePath:XcodePath.value
   }
   console.log(config);
   var configFile=await $writeConfig(config);

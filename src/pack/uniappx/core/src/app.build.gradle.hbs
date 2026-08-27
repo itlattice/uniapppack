@@ -22,13 +22,16 @@ android {
 	{{else}}
 	compileSdk 35
 	{{/if}}
-	
+
 	buildFeatures {
 		{{#if buildFeatures.buildConfig}}
 		buildConfig {{buildFeatures.buildConfig}}
 		{{else}}
 		buildConfig false
 		{{/if}}
+		{{#each buildFeatureEntries}}
+		{{this.key}} {{this.value}}
+		{{/each}}
 	}
 
     defaultConfig {
@@ -64,7 +67,7 @@ android {
         {{#each defaultConfig.buildConfigField}}
         buildConfigField {{{this}}}
         {{/each}}
-		
+
 		{{#if project.uniapp}}
 		multiDexEnabled true
 		{{/if}}
@@ -83,7 +86,7 @@ android {
         ]
         {{/if}}
     }
-	
+
 	{{#if bundle}}
 	bundle {
 		language {
@@ -136,10 +139,27 @@ android {
 	    targetCompatibility JavaVersion.VERSION_1_8
 	}
 
-    {{#if nativeLibs.pickFirsts.length}}
+    {{#if packagingHasJniLibs}}
+    packaging {
+        jniLibs {
+            useLegacyPackaging {{packaging.jniLibsUseLegacyPackaging}}
+        }
+    }
+    {{/if}}
+
+    {{#if hasPackagingOptions}}
     packagingOptions {
         {{#each nativeLibs.pickFirsts}}
         pickFirst '{{this}}'
+        {{/each}}
+        {{#each nativeLibs.excludes}}
+        exclude '{{this}}'
+        {{/each}}
+        {{#each nativeLibs.merges}}
+        merge '{{this}}'
+        {{/each}}
+        {{#each nativeLibs.doNotStrips}}
+        doNotStrip '{{this}}'
         {{/each}}
     }
     {{/if}}
@@ -150,15 +170,22 @@ android {
         // 当前生成工程以可编译为优先，这里关闭该类格式资源的严格校验。
         ignoreAssetsPattern '!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~'
     }
-	
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
 	{{/if}}
 
     aaptOptions {
-        additionalParameters '--auto-add-overlay'
-        ignoreAssetsPattern '!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~'
+        {{#each aaptOptions.additionalParameters}}
+        additionalParameters '{{this}}'
+        {{/each}}
+        {{#if aaptOptions.ignoreAssetsPattern}}
+        ignoreAssetsPattern '{{aaptOptions.ignoreAssetsPattern}}'
+        {{/if}}
+        {{#each aaptOptions.noCompress}}
+        noCompress '{{this}}'
+        {{/each}}
     }
 }
 

@@ -10,7 +10,7 @@
 <script setup>
 import { ref, watch, nextTick, onMounted,defineProps } from 'vue'
 import {$getCurrentTime} from "@/common/common";
-import {$packAndroidAppUniappx} from "@/common/pack";
+import {$packAndroidAppUniappx, $packIosAppUniappx, $packAndroidAppUniapp, $packIosAppUniapp} from "@/common/pack";
 import {$pushPackLog} from "@/common/file";
 
 const containerRef = ref(null)
@@ -75,9 +75,34 @@ const startPack=async ()=>{
   pushLog("开始打包"+ JSON.stringify(props.config))
   pushLog("检查配置中...")
   try {
-    const result = await $packAndroidAppUniappx(props.config,pushLog);
+    const currentPlatform = props.config?.packPlatform || (props.config?.ios ? 'ios' : 'android');
+    const currentAppType = props.config?.appType || 'uniappx'; // 默认 uniappx
+
+    let result;
+    if (currentPlatform === 'ios') {
+      // iOS 平台，根据 appType 分发
+      if (currentAppType === 'uniapp') {
+        result = await $packIosAppUniapp(props.config, pushLog);
+      } else {
+        result = await $packIosAppUniappx(props.config, pushLog);
+      }
+    } else {
+      // Android 平台，根据 appType 分发
+      if (currentAppType === 'uniapp') {
+        result = await $packAndroidAppUniapp(props.config, pushLog);
+      } else {
+        result = await $packAndroidAppUniappx(props.config, pushLog);
+      }
+    }
+
     if (result?.projectDir) {
       pushLog(`原生工程目录：${result.projectDir}`,'#67c23a')
+    }
+    if (result?.workspacePath) {
+      pushLog(`Xcode 工作区：${result.workspacePath}`,'#67c23a')
+    }
+    if (result?.openedPath) {
+      pushLog(`已打开目录：${result.openedPath}`,'#67c23a')
     }
     if (result?.targetApkPath) {
       pushLog(`临时目录 APK：${result.targetApkPath}`,'#67c23a')

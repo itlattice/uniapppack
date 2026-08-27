@@ -4,17 +4,16 @@ import path from 'path'
 import fsExtra from 'fs-extra'
 import { spawn } from 'child_process'
 
-// 这个文件是渲染层与本地 Android 打包核心之间的“唯一桥接层”。
+// 这个文件是渲染层与传统 uni-app 打包核心之间的"唯一桥接层"。
 // 设计目标：
-// 1. 渲染层不直接接触 fs/path/模板渲染等 Node 能力。
+// 1. 与 uniappxPack.js 完全独立，互不干扰。
 // 2. 所有项目配置统一在主进程收口，再传给 core。
-// 3. 输出目录统一规范为：配置的 packPath/appid/uniappx-native-android。
+// 3. 输出目录统一规范为：配置的 packPath/appid/uniapp-native-android。
 
 const projectRoot = path.resolve(process.cwd())
-const localCoreRoot = path.join(projectRoot, 'src', 'pack', 'uniappx', 'core')
+const localCoreRoot = path.join(projectRoot, 'src', 'pack', 'uniapp', 'core')
 const localPackEntry = path.join(localCoreRoot, 'src', 'pack.js')
-
-const localIosPackEntry = path.join(localCoreRoot, 'src', 'pack-ios.js')
+const localPackIosEntry = path.join(localCoreRoot, 'src', 'pack-ios.js')
 
 function getProjectRoot() {
   return projectRoot
@@ -70,7 +69,7 @@ function normalizeLogMessage(message) {
 function createConsoleLog(event) {
   // 将 core 的日志回传到渲染层弹窗。
   return (message, color) => {
-    event.sender.send('uniappx:pack-log', {
+    event.sender.send('uniapp:pack-log', {
       message: normalizeLogMessage(message),
       color,
     })
@@ -78,7 +77,7 @@ function createConsoleLog(event) {
 }
 
 function emitPackLog(event, message, color = 'white') {
-  event.sender.send('uniappx:pack-log', {
+  event.sender.send('uniapp:pack-log', {
     message: normalizeLogMessage(message),
     color,
   })
@@ -92,16 +91,16 @@ function getPackStart() {
   return packModule.start
 }
 
-function getIosPackStart() {
-  const packModule = require(localIosPackEntry)
+function getPackIosStart() {
+  const packModule = require(localPackIosEntry)
   if (typeof packModule.start !== 'function') {
-    throw new Error(`iOS 打包入口无效：${localIosPackEntry}`)
+    throw new Error(`iOS 打包入口无效：${localPackIosEntry}`)
   }
   return packModule.start
 }
 
 function buildPackOptions(options, appConfig, event) {
-  // 这里把“配置窗口里的环境设置”和“当前项目的打包参数”拼成 core 能直接消费的 options。
+  // 这里把"配置窗口里的环境设置"和"当前项目的打包参数"拼成 core 能直接消费的 options。
   // 关键约束：输出根目录必须是 packPath/appid，而不是单独的 packPath。
   const packPath = appConfig.packPath
   if (!packPath) {
@@ -114,12 +113,12 @@ function buildPackOptions(options, appConfig, event) {
 
   const uniappProjectPath = options.android?.path || options.uniappProjectPath
   if (!uniappProjectPath) {
-    throw new Error('缺少 uni-app x 项目路径')
+    throw new Error('缺少 uni-app 项目路径')
   }
 
   const androidLocalSdk = appConfig.uniAndroidSDK || appConfig.uniAndroidSdkPath
   if (!androidLocalSdk) {
-    throw new Error('缺少 uni-app x Android 离线 SDK 路径')
+    throw new Error('缺少 uni-app Android 离线 SDK 路径')
   }
 
   const androidSdk = appConfig.AndroidSDK || appConfig.androidSdk || ''
@@ -129,8 +128,6 @@ function buildPackOptions(options, appConfig, event) {
 
   return {
     root: localCoreRoot,
-    baseProjectRoot: path.join(projectRoot, 'docs', 'src', 'easypackx'),
-    sdkWorkspaceRoot: localCoreRoot,
     uniappxNativeAndroid: path.join(packPath, appid),
     uniappProjectPath,
     appid,
@@ -142,41 +139,7 @@ function buildPackOptions(options, appConfig, event) {
     storePassword: options.android?.androidKeyPassword || options.storePassword || '',
     keyAlias: options.android?.androidKeyAlias || options.keyAlias || '',
     keyPassword: options.android?.androidKeyPwd || options.keyPassword || '',
-    nativeLibPickFirsts: options.android?.nativeLibPickFirsts || options.nativeLibPickFirsts || [],
     packType: normalizePackType(options.android?.packType || options.packType),
-    customConsoleLog: createConsoleLog(event),
-  }
-}
-
-function buildIosPackOptions(options, appConfig, event) {
-  const packPath = appConfig.packPath
-  if (!packPath) {
-    throw new Error('缺少打包输出目录，请先在配置中设置 packPath')
-  }
-  const appid = options.appid
-  if (!appid) {
-    throw new Error('缺少当前项目的 appid')
-  }
-  const uniappProjectPath = options.ios?.path || options.uniappProjectPath
-  if (!uniappProjectPath) {
-    throw new Error('缺少 uni-app x 项目路径')
-  }
-  const iosLocalSdk = appConfig.uniIosSDK || appConfig.uniIosSdkPath
-  if (!iosLocalSdk) {
-    throw new Error('缺少 uni-app x iOS 离线 SDK 路径')
-  }
-  return {
-    root: localCoreRoot,
-    uniappxNativeIos: path.join(packPath, appid),
-    uniappProjectPath,
-    appid,
-    iosLocalSdk,
-    iosSdkDownloadUrl: iosLocalSdk,
-    iosBundleId: options.ios?.iosBundleId || '',
-    channel: options.ios?.iosChannel || 'appstore',
-    unionid: options.ios?.iosUnionid || '',
-    initPrivacyAuthorization: options.ios?.initPrivacyAuthorization !== false,
-    packType: normalizePackType(options.ios?.packType || options.packType),
     customConsoleLog: createConsoleLog(event),
   }
 }
@@ -271,7 +234,7 @@ async function generateAndroidGradleProject(event, options) {
   const appConfig = readAppConfig()
   const start = getPackStart()
   const packOptions = buildPackOptions(options, appConfig, event)
-  event.sender.send('uniappx:pack-log', {
+  event.sender.send('uniapp:pack-log', {
     message: `使用核心打包入口：${localPackEntry}`,
     color: 'white',
   })
@@ -300,33 +263,68 @@ async function generateAndroidGradleProject(event, options) {
   }
 }
 
-async function generateIosProject(event, options) {
-  const appConfig = readAppConfig()
-  const start = getIosPackStart()
-  const packOptions = buildIosPackOptions(options, appConfig, event)
-  emitPackLog(event, `使用 iOS 核心打包入口：${localIosPackEntry}`)
-  const result = await start(packOptions)
-  const projectDir = result?.projectDir || result?.workspacePath || result?.xcodeprojPath
-  if (!projectDir) {
-    throw new Error('iOS 原生工程生成失败，未拿到输出目录')
+function buildIosPackOptions(options, appConfig, event) {
+  const packPath = appConfig.packPath
+  if (!packPath) {
+    throw new Error('缺少打包输出目录，请先在配置中设置 packPath')
   }
-  const openedPath = result?.workspacePath || result?.projectDir || result?.xcodeprojPath
-  if (openedPath) {
-    await shell.openPath(path.dirname(openedPath))
-    emitPackLog(event, `已打开目录：${path.dirname(openedPath)}`, '#67c23a')
+  const appid = options.appid
+  if (!appid) {
+    throw new Error('缺少当前项目的 appid')
   }
+
+  const uniappProjectPath = options.ios?.path || options.uniappProjectPath
+  if (!uniappProjectPath) {
+    throw new Error('缺少 uni-app 项目路径')
+  }
+
+  const iosLocalSdk = appConfig.uniIosSDK || appConfig.uniIosSdkPath
+  if (!iosLocalSdk) {
+    throw new Error('缺少 uni-app iOS 离线 SDK 路径')
+  }
+
   return {
-    ...result,
-    openedPath: openedPath ? path.dirname(openedPath) : ''
+    root: localCoreRoot,
+    uniappxNativeIos: path.join(packPath, appid),
+    uniappProjectPath,
+    appid,
+    iosLocalSdk,
+    iosBundleId: options.ios?.iosBundleId || options.iosBundleId || '',
+    customConsoleLog: createConsoleLog(event),
   }
 }
 
-export function initUniappxPackHandlers() {
+async function generateIosProject(event, options) {
+  const appConfig = readAppConfig()
+  const start = getPackIosStart()
+  const packOptions = buildIosPackOptions(options, appConfig, event)
+  event.sender.send('uniapp:pack-log', {
+    message: `使用核心打包入口：${localPackIosEntry}`,
+    color: 'white',
+  })
+  const projectDir = await start(packOptions)
+  if (!projectDir) {
+    throw new Error('iOS 原生工程生成失败，未拿到输出目录')
+  }
+
+  // 传统 uni-app iOS 打包只生成工程，不执行编译
+  // 打开目录让用户用 Xcode 编译
+  emitPackLog(event, `正在打开工程目录...`, '#67c23a')
+  await shell.openPath(projectDir)
+
+  return {
+    projectDir,
+    openedPath: projectDir,
+  }
+}
+
+export function initUniappPackHandlers() {
   // 渲染层只需要 invoke 这个 channel，不需要知道 core 的真实路径或参数结构。
-  ipcMain.handle('uniappx:generate-android-gradle', async (event, options) => {
+  ipcMain.handle('uniapp:generate-android-gradle', async (event, options) => {
     return await generateAndroidGradleProject(event, options)
   })
-  ipcMain.handle('uniappx:generate-ios-project', async (event, options) => {
+
+  ipcMain.handle('uniapp:generate-ios-project', async (event, options) => {
     return await generateIosProject(event, options)
   })
 }

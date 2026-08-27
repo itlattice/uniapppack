@@ -1473,13 +1473,172 @@ function enableNativeLibPickFirst(pattern) {
 		return;
 	}
 	if (!Array.isArray(appBuildGradleConfig.nativeLibs?.pickFirsts)) {
-		appBuildGradleConfig.nativeLibs = { pickFirsts: [] };
+		appBuildGradleConfig.nativeLibs = { pickFirsts: [], excludes: [], merges: [], doNotStrips: [] };
 	}
 	if (!appBuildGradleConfig.nativeLibs.pickFirsts.includes(pattern)) {
 		appBuildGradleConfig.nativeLibs.pickFirsts.push(pattern);
 	}
 }
 
+	function pushUniqueString(list, value) {
+		if (!value || typeof value !== 'string') {
+			return;
+		}
+		if (!list.includes(value)) {
+			list.push(value);
+		}
+	}
+
+	function normalizeStringList(value) {
+		if (Array.isArray(value)) {
+			return value.filter(item => typeof item === 'string' && item.trim()).map(item => item.trim());
+		}
+		if (typeof value === 'string' && value.trim()) {
+			return [value.trim()];
+		}
+		return [];
+	}
+
+	function ensureNativeLibsConfig() {
+		if (!appBuildGradleConfig.nativeLibs || typeof appBuildGradleConfig.nativeLibs !== 'object') {
+			appBuildGradleConfig.nativeLibs = {
+				pickFirsts: [],
+				excludes: [],
+				merges: [],
+				doNotStrips: []
+			};
+		}
+		if (!Array.isArray(appBuildGradleConfig.nativeLibs.pickFirsts)) {
+			appBuildGradleConfig.nativeLibs.pickFirsts = [];
+		}
+		if (!Array.isArray(appBuildGradleConfig.nativeLibs.excludes)) {
+			appBuildGradleConfig.nativeLibs.excludes = [];
+		}
+		if (!Array.isArray(appBuildGradleConfig.nativeLibs.merges)) {
+			appBuildGradleConfig.nativeLibs.merges = [];
+		}
+		if (!Array.isArray(appBuildGradleConfig.nativeLibs.doNotStrips)) {
+			appBuildGradleConfig.nativeLibs.doNotStrips = [];
+		}
+		return appBuildGradleConfig.nativeLibs;
+	}
+
+	function enableNativeLibExclude(pattern) {
+		pushUniqueString(ensureNativeLibsConfig().excludes, pattern);
+	}
+
+	function enableNativeLibMerge(pattern) {
+		pushUniqueString(ensureNativeLibsConfig().merges, pattern);
+	}
+
+	function enableNativeLibDoNotStrip(pattern) {
+		pushUniqueString(ensureNativeLibsConfig().doNotStrips, pattern);
+	}
+
+	function refreshPackagingTemplateFlags() {
+		const nativeLibs = ensureNativeLibsConfig();
+		if (!appBuildGradleConfig.packaging || typeof appBuildGradleConfig.packaging !== 'object') {
+			appBuildGradleConfig.packaging = { jniLibsUseLegacyPackaging: undefined };
+		}
+		appBuildGradleConfig.packagingHasJniLibs = typeof appBuildGradleConfig.packaging.jniLibsUseLegacyPackaging === 'boolean';
+		appBuildGradleConfig.hasPackagingOptions = (
+			nativeLibs.pickFirsts.length > 0 ||
+			nativeLibs.excludes.length > 0 ||
+			nativeLibs.merges.length > 0 ||
+			nativeLibs.doNotStrips.length > 0
+		);
+		const buildFeatures = appBuildGradleConfig.buildFeatures || { buildConfig: false };
+		appBuildGradleConfig.buildFeatures = buildFeatures;
+		appBuildGradleConfig.buildFeatureEntries = Object.keys(buildFeatures)
+			.filter(key => key !== 'buildConfig' && Object.prototype.hasOwnProperty.call(buildFeatures, key))
+			.map(key => ({
+				key,
+				value: buildFeatures[key] === true || buildFeatures[key] === 'true'
+			}));
+	}
+
+	/**
+	 * 将产物 manifest distribute.android 中的 packaging 相关字段映射到 Gradle 配置。
+	 * 未配置时保持现有默认输出不变。
+	 */
+	function applyAndroidPackagingFromManifest(androidDistribute = {}) {
+		if (!androidDistribute || typeof androidDistribute !== 'object') {
+			refreshPackagingTemplateFlags();
+			return;
+		}
+		if (!appBuildGradleConfig.aaptOptions || typeof appBuildGradleConfig.aaptOptions !== 'object') {
+			appBuildGradleConfig.aaptOptions = {
+				additionalParameters: ['--auto-add-overlay'],
+				ignoreAssetsPattern: '!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~',
+				noCompress: []
+			};
+		}
+		if (!appBuildGradleConfig.packaging || typeof appBuildGradleConfig.packaging !== 'object') {
+			appBuildGradleConfig.packaging = { jniLibsUseLegacyPackaging: undefined };
+		}
+		ensureNativeLibsConfig();
+
+		if (typeof androidDistribute.disableLegacyPackaging === 'boolean') {
+			appBuildGradleConfig.packaging.jniLibsUseLegacyPackaging = !androidDistribute.disableLegacyPackaging;
+			output.info(
+				`已应用 disableLegacyPackaging=${androidDistribute.disableLegacyPackaging} → useLegacyPackaging=${appBuildGradleConfig.packaging.jniLibsUseLegacyPackaging}`,
+				customConsoleLog
+			);
+		}
+
+		const aaptOptions = androidDistribute.aaptOptions;
+		if (aaptOptions && typeof aaptOptions === 'object') {
+			if (aaptOptions.additionalParameters !== undefined) {
+				appBuildGradleConfig.aaptOptions.additionalParameters = normalizeStringList(aaptOptions.additionalParameters);
+			}
+			if (typeof aaptOptions.ignoreAssetsPattern === 'string' && aaptOptions.ignoreAssetsPattern.trim()) {
+				appBuildGradleConfig.aaptOptions.ignoreAssetsPattern = aaptOptions.ignoreAssetsPattern.trim();
+			}
+			if (aaptOptions.noCompress !== undefined) {
+				appBuildGradleConfig.aaptOptions.noCompress = [];
+				normalizeStringList(aaptOptions.noCompress).forEach(item => {
+					pushUniqueString(appBuildGradleConfig.aaptOptions.noCompress, item);
+				});
+			}
+			output.info('已应用 manifest aaptOptions 配置', customConsoleLog);
+		}
+
+		const buildFeatures = androidDistribute.buildFeatures;
+		if (buildFeatures && typeof buildFeatures === 'object') {
+			if (!appBuildGradleConfig.buildFeatures || typeof appBuildGradleConfig.buildFeatures !== 'object') {
+				appBuildGradleConfig.buildFeatures = { buildConfig: false };
+			}
+			Object.keys(buildFeatures).forEach((key) => {
+				const incoming = buildFeatures[key];
+				if (typeof incoming !== 'boolean') {
+					return;
+				}
+				if (key === 'buildConfig') {
+					appBuildGradleConfig.buildFeatures.buildConfig = Boolean(
+						appBuildGradleConfig.buildFeatures.buildConfig || incoming
+					);
+					return;
+				}
+				appBuildGradleConfig.buildFeatures[key] = incoming;
+			});
+			output.info('已应用 manifest buildFeatures 配置', customConsoleLog);
+		}
+
+		const packagingOptions = androidDistribute.packagingOptions;
+		if (packagingOptions && typeof packagingOptions === 'object') {
+			normalizeStringList(packagingOptions.pickFirst).forEach(enableNativeLibPickFirst);
+			normalizeStringList(packagingOptions.exclude).forEach(enableNativeLibExclude);
+			normalizeStringList(packagingOptions.merge).forEach(enableNativeLibMerge);
+			normalizeStringList(packagingOptions.doNotStrip).forEach(enableNativeLibDoNotStrip);
+			const nativeLibs = ensureNativeLibsConfig();
+			output.info(
+				`已应用 manifest packagingOptions：pickFirst=${nativeLibs.pickFirsts.length}, exclude=${nativeLibs.excludes.length}, merge=${nativeLibs.merges.length}, doNotStrip=${nativeLibs.doNotStrips.length}`,
+				customConsoleLog
+			);
+		}
+
+		refreshPackagingTemplateFlags();
+	}
 const dirname = (filePath) => path.join(__dirname, filePath);
 
 // 编译模版
@@ -1959,6 +2118,7 @@ async function updateBuildInModules() {
 		// 	appBuildGradleConfig.abis = buildAbis(manifest.app.distribute.android.abiFilters)
 		// }
 		appBuildGradleConfig.abis = buildAbis(androidDistribute?.abiFilters ?? ['arm64-v8a'])
+		applyAndroidPackagingFromManifest(androidDistribute);
 		const projectFiles = [
 			'plugins/uts-kotlin-compiler-plugin-0.0.1.jar',
 			'plugins/uts-kotlin-gradle-plugin-0.0.1.jar'
@@ -3225,6 +3385,7 @@ async function buildUnix() {
 		normalizeAppDependencies();
 		appBuildGradleConfig.defaultConfig.manifestPlaceholderEntries = buildManifestPlaceholderEntries();
 		appBuildGradleConfig.defaultConfig.allowManifestPlaceholders = appBuildGradleConfig.defaultConfig.manifestPlaceholderEntries.length > 0;
+		refreshPackagingTemplateFlags();
 		output.info(`最终app最小minSdk：${appBuildGradleConfig.minSdkVersion}`, customConsoleLog);
 		output.info(`最终app abiFilters：${appBuildGradleConfig.abis || '未配置'}`, customConsoleLog);
 		output.info(`最终签名别名：${appBuildGradleConfig.keyStore.keyAlias || '未配置'}`, customConsoleLog);
