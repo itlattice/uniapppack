@@ -19,6 +19,14 @@ const localPackEntry = path.join(localCoreRoot, 'src', 'pack.js')
 
 const localIosPackEntry = path.join(localCoreRoot, 'src', 'pack-ios.js')
 
+// extraResources 解压到 resources/ 目录，在打包后需要从 app.asar 外读取
+function getBaseProjectRoot() {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, 'docs', 'src', 'easypackx')
+  }
+  return path.join(appRoot, 'docs', 'src', 'easypackx')
+}
+
 function getProjectRoot() {
   // 打包后这个路径用于拼接用户数据,不再作为模块查找基准
   return process.cwd()
@@ -133,7 +141,7 @@ function buildPackOptions(options, appConfig, event) {
 
   return {
     root: localCoreRoot,
-    baseProjectRoot: path.join(appRoot, 'docs', 'src', 'easypackx'),
+    baseProjectRoot: getBaseProjectRoot(),
     sdkWorkspaceRoot: localCoreRoot,
     uniappxNativeAndroid: path.join(packPath, appid),
     uniappProjectPath,

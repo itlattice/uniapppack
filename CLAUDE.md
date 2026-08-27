@@ -47,7 +47,25 @@ src/common/pack.js              (唯一桥接层)                             sr
 src/components/pack.vue         拼装 options、回传日志                   Handlebars 模板 + 资源合并
                                 Android: 执行 gradlew、复制 APK
                                 iOS: shell.openPath 打开生成目录
+
+                                ↓ 基础模板来源
+                                docs/src/easypackx/uniappx-native-android-base/  (Android Gradle 基础工程)
 ```
+
+### 路径解析规则（重要）
+
+Electron 打包后路径分为两类：
+
+1. **ASAR 内资源**（`app.getAppPath()`）
+   - 代码模块：`src/pack/uniappx/core/src/pack.js`
+   - 可通过 `require()` 加载，但 `fs` 操作受限（无法遍历目录）
+
+2. **extraResources 资源**（`process.resourcesPath`）
+   - 模板目录：`docs/src/easypackx/uniappx-native-android-base/`
+   - 必须配置在 `package.json` 的 `build.extraResources` 中
+   - 打包后解压到 `resources/` 目录，支持完整 `fs` 操作
+
+**核心约定**：需要 `fs.copySync` / `fs.readdirSync` 的目录资源必须走 `extraResources`，代码模块走 `files`（打进 ASAR）。`uniappxPack.js` 通过 `getBaseProjectRoot()` 区分开发/打包环境路径。
 
 ### 分层约定（改打包逻辑时必须遵守）
 

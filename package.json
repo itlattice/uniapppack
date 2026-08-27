@@ -113,6 +113,10 @@
       {
         "from": "./public/resources",
         "to": "./"
+      },
+      {
+        "from": "./docs/src/easypackx",
+        "to": "./docs/src/easypackx"
       }
     ],
     "nsis": {
