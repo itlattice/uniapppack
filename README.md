@@ -5,14 +5,15 @@
 ## ✨ 功能特性
 
 - 🚀 **uni-app x 支持**
+
   - Android: 完整的 Gradle 构建流程（生成原生工程 → 构建 APK）
   - iOS: 生成 Xcode 原生工程（需在 macOS 环境手动编译）
-  
 - 📦 **传统 uni-app 支持**
+
   - Android: 离线打包生成 APK
   - iOS: 生成原生工程目录
-
 - 🎯 **便捷特性**
+
   - 可视化配置界面，无需手动修改配置文件
   - 项目配置自动保存，支持多项目快速切换
   - 实时日志输出，打包过程透明可控
@@ -21,10 +22,12 @@
 ## 📋 环境要求
 
 ### 基础要求
+
 - **Node.js**: `^20.19.0 || >=22.12.0`（推荐 `20.20.2`）
 - **操作系统**: Windows（主要支持）/ macOS（iOS 打包功能需要）
 
 ### Android 打包环境
+
 - **HBuilderX**: 包含 uni-app x 离线 SDK
 - **Android SDK**: 包含构建工具和平台工具
 - **JDK**: 推荐 JDK 17
@@ -32,6 +35,7 @@
 - **Android Studio**: （可选）用于调试和进一步开发
 
 ### iOS 打包环境（仅 macOS）
+
 - **HBuilderX**: 包含 uni-app x 离线 iOS SDK
 - **Xcode**: （可选）用于后续编译和签名
 
@@ -64,15 +68,16 @@ npm run electron:build
 ### 快速配置流程
 
 1. **首次使用配置环境**
+
    - 点击右上角设置按钮
    - 配置 HBuilderX 路径、临时文件目录
    - 配置 Android/iOS 离线 SDK 及相关工具路径
-
 2. **准备项目**
+
    - 在 HBuilderX 中对 uni-app x 项目执行"发行 → 本地打包"
    - 确保生成了 `unpackage/resources/app-android` 或 `app-ios` 资源
-
 3. **开始打包**
+
    - 选择项目目录
    - 填写包名/Bundle ID、证书信息
    - 点击"打包"或"生成工程"按钮
@@ -135,16 +140,11 @@ npm run electron:generate-icons  # 从 public/icon.png 生成多尺寸图标
 
 ## 📝 注意事项
 
-1. **项目必须先在 HBuilderX 本地发行**  
-   打包机依赖 `unpackage/resources/app-android` 或 `app-ios` 资源，请确保在 HBuilderX 中完成本地发行操作。
+1. **项目必须先在 HBuilderX 本地发行**打包机依赖 `unpackage/resources/app-android` 或 `app-ios` 资源，请确保在 HBuilderX 中完成本地发行操作。
+2. **iOS 打包限制**当前版本仅生成 iOS 原生工程，不执行 Xcode 编译、签名和 IPA 导出，需手动在 macOS 上使用 Xcode 完成后续步骤。
+3. **证书和密钥管理**Android 证书文件和密码会保存在本地 SQLite 数据库中（userData 目录），请妥善保管配置文件。
+4. **兼容性说明**
 
-2. **iOS 打包限制**  
-   当前版本仅生成 iOS 原生工程，不执行 Xcode 编译、签名和 IPA 导出，需手动在 macOS 上使用 Xcode 完成后续步骤。
-
-3. **证书和密钥管理**  
-   Android 证书文件和密码会保存在本地 SQLite 数据库中（userData 目录），请妥善保管配置文件。
-
-4. **兼容性说明**  
    - 最高支持 HBuilderX 5.14 版本
    - 主要在 Windows 11 上测试，macOS 支持待进一步验证
 
@@ -158,9 +158,9 @@ npm run electron:generate-icons  # 从 public/icon.png 生成多尺寸图标
 
 ## 👨‍💻 作者
 
-**itlattice** - IT格子
+**itlattice** - IT格子 （itlattice@gmail.com）
 
 ---
 
-**版本**: v1.0.0  
+**版本**: v1.0.0
 **更新日期**: 2026-08-27
