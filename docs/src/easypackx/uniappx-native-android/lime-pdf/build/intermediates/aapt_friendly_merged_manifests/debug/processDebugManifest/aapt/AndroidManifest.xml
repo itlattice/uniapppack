@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="uts.sdk.modules.limePdf" >
+
+    <uses-sdk android:minSdkVersion="21" />
+
+    <application>
+        <meta-data
+            android:name="UTS_PDF_LimePDF"
+            android:value="LimePDF" />
+
+        <activity android:name="uts.sdk.modules.limePdf.LimePDFFActivity" />
+    </application>
+
+</manifest>

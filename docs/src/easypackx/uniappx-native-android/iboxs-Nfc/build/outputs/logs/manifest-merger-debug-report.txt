@@ -1,0 +1,50 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:2:1-11:12
+	package
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:2:70-116
+	xmlns:android
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.CAMERA
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:3:5-64
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:3:22-62
+uses-permission#android.permission.FLASHLIGHT
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:4:5-68
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:4:22-66
+uses-permission#android.permission.READ_MEDIA_IMAGES
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:5:5-75
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:5:22-73
+uses-permission#android.permission.NFC
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:6:5-61
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:6:22-59
+uses-feature#android.hardware.nfc
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:7:5-81
+	android:required
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:7:55-79
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:7:19-54
+application
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:8:5-10:19
+	android:supportsRtl
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:8:45-71
+	android:allowBackup
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:8:18-44
+activity#com.itgz8.scannfc.NFCScanningActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:9:9-73
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml:9:19-71
+uses-sdk
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Nfc\src\main\AndroidManifest.xml

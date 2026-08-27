@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>文档查看</title>
+    <style>
+        body { margin: 0; padding: 0; background: #F5F5F5; }
+        #pdf-container { 
+            width: 100vw; 
+            min-height: 100vh; 
+            overflow: auto; 
+            background: #F5F5F5;
+            padding: 12px 0;
+        }
+        canvas { 
+            display: block; 
+            width: 100%; 
+            margin: 0 auto 16px auto;  /* 下边距 16px，产生间距 */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            border-radius: 2px;
+            background: #fff;
+            max-width: 1000px;          /* 大屏上限制最大宽度，更美观 */
+        }
+        /* 最后一个 canvas 不需要下边距 */
+        canvas:last-child { margin-bottom: 0; }
+    </style>
+    <!-- 1. 引入PDF.js核心库和Worker（直接使用最新CDN） -->
+    <script src="https://cdn.itgz8.com/pdfjs/3.11.174/pdf.min.js"></script>
+    <script>
+        // 2. 设置Worker源（必须配置）
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.itgz8.com/pdfjs/3.11.174/pdf.worker.min.js';
+        
+        // 3. 获取URL参数，决定加载哪个PDF
+        const urlParams = new URLSearchParams(window.location.search);
+        var pdfUrl = urlParams.get('file')||''; // 如果没传参，就加载默认文件
+		pdfUrl = decodeURIComponent(pdfUrl);
+		console.log('加载PDF文件：', pdfUrl);
+        // 4. 渲染函数：加载并绘制所有页面
+        function renderPdf(url) {
+            pdfjsLib.getDocument(url).promise.then(function(pdf) {
+                const container = document.getElementById('pdf-container');
+                container.innerHTML = ''; // 清空占位
+                const totalPages = pdf.numPages;
+                
+                // 循环绘制每一页
+                for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                    pdf.getPage(pageNum).then(function(page) {
+                        const canvas = document.createElement('canvas');
+                        container.appendChild(canvas);
+                        const context = canvas.getContext('2d');
+                        
+                        // 设定渲染清晰度（适配手机屏幕）
+                        const viewport = page.getViewport({ scale: 1.5 });
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+                        
+                        const renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+                        page.render(renderContext);
+                    });
+                }
+            }).catch(function(err) {
+                // 如果加载失败，显示错误信息
+                document.getElementById('pdf-container').innerHTML = '<p style="text-align:center;color:#999;margin-top:50px;">文档加载失败，请检查网络或文件路径</p>';
+                console.error('PDF加载错误:', err);
+            });
+        }
+
+        // 执行渲染
+		if(pdfUrl!=''){
+			renderPdf(pdfUrl);
+		} else{
+			document.getElementById('pdf-container').innerHTML = '<p style="text-align:center;color:#999;margin-top:50px;">文档路径为空</p>';
+			console.error('PDF加载错误:', err);
+		}
+    </script>
+</head>
+<body>
+    <!-- 渲染容器 -->
+    <div id="pdf-container"><p style="text-align:center;color:#999;margin-top:50px;">正在加载文档...</p></div>
+</body>
+</html>

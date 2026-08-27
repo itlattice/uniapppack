@@ -1,0 +1,30 @@
+{
+  "id": "4888378",
+  "name": "uniapp公共插件",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "433839",
+      "name": "check_box",
+      "font_class": "checkbox",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "433844",
+      "name": "check_box_outline_blank",
+      "font_class": "checkboxoutlineblank",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "5387584",
+      "name": "箭头_向左",
+      "font_class": "jiantou_xiangzuo",
+      "unicode": "eb09",
+      "unicode_decimal": 60169
+    }
+  ]
+}

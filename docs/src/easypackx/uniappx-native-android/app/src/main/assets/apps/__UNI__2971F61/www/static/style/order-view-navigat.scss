@@ -1,0 +1,47 @@
+.handleaction{
+	.name{
+		font-size: 14px;
+		margin-left: 8rpx;
+		line-height: 22px;
+	}
+	.gengduo{
+		margin-left: 20rpx;
+	}
+}
+.actions{
+	bottom: 0;
+	left: 0;
+	padding-bottom: var(--uni-safe-area-inset-bottom);
+	.action{
+		height: 40px;
+		width: 375rpx;
+		padding-top: 10px;
+	}
+	.chexiaobtn{
+		background: #1776FC;
+		padding-left: 100rpx;
+	}
+	.name{
+		font-size: 16px;
+		padding-left: 10rpx;
+	}
+	.confirmbtn{
+		background: #ED3232;
+		padding-left: 100rpx;
+	}
+}
+.menulist{
+	padding-left: 10rpx;
+	padding-right: 10rpx;
+	padding-top: 5px;
+	.menu{
+		height: 40px;
+		.content{
+			line-height: 40px;
+			font-size: 16px;
+		}
+	}
+	.borderb{
+		border-bottom: 1px solid #f5f5f5;
+	}
+}

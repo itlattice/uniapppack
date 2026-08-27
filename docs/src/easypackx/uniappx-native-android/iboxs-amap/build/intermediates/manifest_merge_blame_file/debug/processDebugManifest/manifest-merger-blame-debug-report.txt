@@ -1,0 +1,71 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.iboxsAmap" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7
+8    <uses-permission android:name="android.permission.INTERNET" />
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:3:5-66
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:3:22-64
+9    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:4:5-78
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:4:22-76
+10    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:5:5-80
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:5:22-78
+11    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:6:5-74
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:6:22-72
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:7:5-78
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:7:22-76
+13    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:8:5-75
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:8:22-73
+14    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:9:5-75
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:9:22-73
+15    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:10:5-84
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:10:22-82
+16    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:11:5-88
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:11:22-86
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:12:5-80
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:12:22-78
+18    <uses-permission android:name="android.permission.BLUETOOTH" />
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:13:5-67
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:13:22-65
+19    <uses-permission android:name="android.permission.WAKE_LOCK" />
+19-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:14:5-67
+19-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:14:22-65
+20    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:15:5-72
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:15:22-70
+21    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+21-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:16:5-79
+21-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:16:22-77
+22    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+22-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:17:5-76
+22-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:17:22-74
+23
+24    <application>
+24-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:18:5-22:19
+25        <service android:name="com.amap.api.location.APSService" />
+25-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:19:9-67
+25-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:19:18-65
+26
+27        <activity android:name="com.amap.api.navi.AmapRouteActivity" />
+27-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:20:9-71
+27-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:20:19-69
+28        <activity
+28-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:21:9-120
+29            android:name="com.amap.api.maps.offlinemap.OfflineMapActivity"
+29-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:21:19-81
+30            android:screenOrientation="portrait" />
+30-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-amap\src\main\AndroidManifest.xml:21:82-118
+31    </application>
+32
+33</manifest>

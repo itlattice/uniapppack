@@ -1,0 +1,34 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:1:1-7:12
+	package
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:2:5-77
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:2:22-75
+uses-permission#android.permission.VIBRATE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:3:5-65
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:3:22-63
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:4:5-76
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:4:22-74
+application
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:5:5-6:19
+	android:supportsRtl
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:5:45-71
+	android:allowBackup
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:5:18-44
+uses-sdk
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml

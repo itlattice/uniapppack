@@ -1,0 +1,90 @@
+<template>
+	<view class="content">
+		<image class="logo" src="/static/logo.png" @click="send"></image>
+		<view class="text-area">
+			<text class="title">{{title}}</text>
+		</view>
+	</view>
+</template>
+
+<script>
+	// #ifdef APP-ANDROID
+	import BroadcastReceiver from 'android.content.BroadcastReceiver'
+	import Context from 'android.content.Context'
+	import Intent from 'android.content.Intent'
+	import IntentFilter from 'android.content.IntentFilter'
+	import Build from 'android.os.Build'
+	class MyReciver extends BroadcastReceiver {
+		constructor() {
+
+		}
+		override onReceive(context : Context, intent : Intent) {
+			var action = intent.getAction()
+			if (action.equals("ACTION_FROM_NATIVE")) {
+				var value = intent.getStringExtra("key");
+				uni.showToast({
+					title: value!!
+				})
+			}
+		}
+	}
+	// #endif
+	export default {
+		data() {
+			return {
+				title: '点击图片发送广播',
+				// #ifdef APP-ANDROID
+				receiver: null as BroadcastReceiver | null
+				// #endif
+			}
+		},
+		onLoad() {
+
+		},
+		onReady() {
+			// #ifdef APP-ANDROID
+			this.receiver = new MyReciver()
+			if (Build.VERSION.SDK_INT >= 33) {
+				UTSAndroid.getUniActivity()?.registerReceiver(this.receiver, IntentFilter("ACTION_FROM_NATIVE"), Context.RECEIVER_EXPORTED)
+			} else {
+				UTSAndroid.getUniActivity()?.registerReceiver(this.receiver, IntentFilter("ACTION_FROM_NATIVE"))
+			}
+			// #endif
+		},
+
+		onUnload() {
+			// #ifdef APP-ANDROID
+			UTSAndroid.getUniActivity()?.unregisterReceiver(this.receiver!)
+			// #endif
+		},
+		methods: {
+			send() {
+				// #ifdef APP-ANDROID
+				var intent = new Intent("ACTION_TO_NATIVE");
+				intent.putExtra("key", "接受到广播，三秒钟之后会接收到原生发送的广播");
+				UTSAndroid.getUniActivity()?.sendBroadcast(intent)
+				// #endif
+			}
+		}
+	}
+</script>
+
+<style>
+	.content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.logo {
+		height: 200rpx;
+		width: 200rpx;
+		margin-top: 200rpx;
+		margin-bottom: 50rpx;
+	}
+
+	.title {
+		font-size: 36rpx;
+		color: #8f8f94;
+	}
+</style>

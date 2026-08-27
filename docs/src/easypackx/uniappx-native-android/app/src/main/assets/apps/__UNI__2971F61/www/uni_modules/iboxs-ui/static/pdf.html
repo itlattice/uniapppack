@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>文档查看</title>
+    <style>
+        body { margin: 0; padding: 0; background: #fff; }
+        #pdf-container { width: 100vw; height: 100vh; overflow: auto; }
+        canvas { display: block; width: 100%; margin-bottom: 5px; }
+    </style>
+    <!-- 1. 引入PDF.js核心库和Worker（直接使用最新CDN） -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // 2. 设置Worker源（必须配置）
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        
+        // 3. 获取URL参数，决定加载哪个PDF
+        const urlParams = new URLSearchParams(window.location.search);
+        const pdfUrl = "https://cdn.itgz8.com/test/pdf/4.pdf"; // 如果没传参，就加载默认文件
+
+        // 4. 渲染函数：加载并绘制所有页面
+        function renderPdf(url) {
+            pdfjsLib.getDocument(url).promise.then(function(pdf) {
+                const container = document.getElementById('pdf-container');
+                container.innerHTML = ''; // 清空占位
+                const totalPages = pdf.numPages;
+                
+                // 循环绘制每一页
+                for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                    pdf.getPage(pageNum).then(function(page) {
+                        const canvas = document.createElement('canvas');
+                        container.appendChild(canvas);
+                        const context = canvas.getContext('2d');
+                        
+                        // 设定渲染清晰度（适配手机屏幕）
+                        const viewport = page.getViewport({ scale: 1.5 });
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+                        
+                        const renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+                        page.render(renderContext);
+                    });
+                }
+            }).catch(function(err) {
+                // 如果加载失败，显示错误信息
+                document.getElementById('pdf-container').innerHTML = '<p style="text-align:center;color:#999;margin-top:50px;">文档加载失败，请检查网络或文件路径</p>';
+                console.error('PDF加载错误:', err);
+            });
+        }
+
+        // 执行渲染
+        renderPdf(pdfUrl);
+    </script>
+</head>
+<body>
+    <!-- 渲染容器 -->
+    <div id="pdf-container"><p style="text-align:center;color:#999;margin-top:50px;">正在加载文档...</p></div>
+</body>
+</html>

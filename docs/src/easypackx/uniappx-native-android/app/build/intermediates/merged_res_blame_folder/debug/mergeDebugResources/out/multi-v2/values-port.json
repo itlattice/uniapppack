@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "cn.testapp.app-mergeDebugResources-91:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\zqu10\\.gradle\\caches\\8.14.3\\transforms\\0fc7cf10cd49544d17988746bb13595d\\transformed\\appcompat-1.7.1\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zqu10\\.gradle\\caches\\8.14.3\\transforms\\d459bfb93922b7645d8875778f9e0de7\\transformed\\jetified-aliyunFace-1.0.2\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,194,260,324,398,464",
+                        "endColumns": "69,68,65,63,73,65,74",
+                        "endOffsets": "120,189,255,319,393,459,534"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "111,181,250,316,380,454,520",
+                        "endColumns": "69,68,65,63,73,65,74",
+                        "endOffsets": "176,245,311,375,449,515,590"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="uts.sdk.modules.limePdf" >
+4
+5    <uses-sdk android:minSdkVersion="21" />
+6
+7    <application>
+7-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\lime-pdf\src\main\AndroidManifest.xml:3:5-6:19
+8        <meta-data
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\lime-pdf\src\main\AndroidManifest.xml:4:9-76
+9            android:name="UTS_PDF_LimePDF"
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\lime-pdf\src\main\AndroidManifest.xml:4:20-50
+10            android:value="LimePDF" />
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\lime-pdf\src\main\AndroidManifest.xml:4:51-74
+11
+12        <activity android:name="uts.sdk.modules.limePdf.LimePDFFActivity" />
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\lime-pdf\src\main\AndroidManifest.xml:5:9-76
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\lime-pdf\src\main\AndroidManifest.xml:5:19-74
+13    </application>
+14
+15</manifest>

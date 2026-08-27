@@ -1,0 +1,38 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.iboxsBleBluetooth" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7    <!-- 按下面方式配置需要自定义添加的权限 -->
+8    <!-- 使用网络权限 -->
+9    <uses-permission android:name="android.permission.INTERNET" />
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:5:5-66
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:5:22-64
+10    <!-- 定位权限 -->
+11    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:7:5-80
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:7:22-78
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:8:5-78
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:8:22-76
+13    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:9:5-88
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:9:22-86
+14    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:10:5-78
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:10:22-76
+15    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:11:5-73
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:11:22-71
+16    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:12:5-72
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:12:22-70
+17    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:13:5-77
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:13:22-75
+18    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:14:5-75
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Bluetooth\src\main\AndroidManifest.xml:14:22-73
+19
+20</manifest>

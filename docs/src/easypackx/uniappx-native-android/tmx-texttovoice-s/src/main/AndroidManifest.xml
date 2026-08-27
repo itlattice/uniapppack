@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:usesCleartextTraffic="true">
+    <meta-data android:name="ScopedStorage" android:value="true"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESSIBILITY_SERVICE"/>
+    <!-- 音频音量设置 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE"/>
+        </intent>
+    </queries>
+</manifest>

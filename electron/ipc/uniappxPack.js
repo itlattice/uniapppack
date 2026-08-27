@@ -10,14 +10,18 @@ import { spawn } from 'child_process'
 // 2. 所有项目配置统一在主进程收口，再传给 core。
 // 3. 输出目录统一规范为：配置的 packPath/appid/uniappx-native-android。
 
-const projectRoot = path.resolve(process.cwd())
-const localCoreRoot = path.join(projectRoot, 'src', 'pack', 'uniappx', 'core')
+// 开发环境：__dirname = E:\uniapppack\dist-electron (构建输出)
+// 打包后：__dirname = E:\...\resources\app.asar\dist-electron
+// app.getAppPath() 始终指向 app.asar 或开发目录根
+const appRoot = app.getAppPath()
+const localCoreRoot = path.join(appRoot, 'src', 'pack', 'uniappx', 'core')
 const localPackEntry = path.join(localCoreRoot, 'src', 'pack.js')
 
 const localIosPackEntry = path.join(localCoreRoot, 'src', 'pack-ios.js')
 
 function getProjectRoot() {
-  return projectRoot
+  // 打包后这个路径用于拼接用户数据,不再作为模块查找基准
+  return process.cwd()
 }
 
 function getAppConfigPath() {
@@ -129,7 +133,7 @@ function buildPackOptions(options, appConfig, event) {
 
   return {
     root: localCoreRoot,
-    baseProjectRoot: path.join(projectRoot, 'docs', 'src', 'easypackx'),
+    baseProjectRoot: path.join(appRoot, 'docs', 'src', 'easypackx'),
     sdkWorkspaceRoot: localCoreRoot,
     uniappxNativeAndroid: path.join(packPath, appid),
     uniappProjectPath,

@@ -1,0 +1,15 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.iboxsSqlite" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7
+8    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-sqlite\src\main\AndroidManifest.xml:3:5-79
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-sqlite\src\main\AndroidManifest.xml:3:22-77
+9    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-sqlite\src\main\AndroidManifest.xml:4:5-80
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-sqlite\src\main\AndroidManifest.xml:4:22-78
+10
+11</manifest>

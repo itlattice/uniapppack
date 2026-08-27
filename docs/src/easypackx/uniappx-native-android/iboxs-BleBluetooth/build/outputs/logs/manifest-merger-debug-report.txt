@@ -1,0 +1,50 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:2:1-12:12
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:2:1-12:12
+	package
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:2:70-116
+	xmlns:android
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:3:5-66
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:3:22-64
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:5:5-80
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:5:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:6:5-78
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:6:22-76
+uses-permission#android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:7:5-88
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:7:22-86
+uses-permission#android.permission.ACCESS_MOCK_LOCATION
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:8:5-78
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:8:22-76
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:9:5-72
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:9:22-70
+uses-permission#android.permission.BLUETOOTH_ADVERTISE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:10:5-77
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:10:22-75
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:11:5-75
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml:11:22-73
+uses-sdk
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-BleBluetooth\src\main\AndroidManifest.xml

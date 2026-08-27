@@ -1,0 +1,92 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:2:1-22:12
+	package
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:2:70-116
+	xmlns:android
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:2:11-69
+uses-feature#android.hardware.camera
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:3:5-84
+	android:required
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:3:58-82
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:3:19-57
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:4:5-80
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:4:22-78
+uses-permission#android.permission.CAMERA
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:5:5-64
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:5:22-62
+uses-permission#android.permission.FLASHLIGHT
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:6:5-68
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:6:22-66
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:7:22-77
+uses-permission#android.permission.READ_MEDIA_IMAGES
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:8:5-75
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:8:22-73
+uses-permission#android.permission.VIBRATE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:9:5-65
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:9:22-63
+uses-permission#android.permission.MANAGE_EXTERNAL_STORAGE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:10:22-79
+application
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:11:5-21:19
+	android:supportsRtl
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:11:45-71
+	android:allowBackup
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:11:18-44
+activity#com.itgz8.scancode.BarcodeScanningActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:9-17:20
+	android:launchMode
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:77-108
+	android:exported
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:109-132
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:19-76
+intent-filter#action:name:com.itgz8.scancode.BarcodeScanningActivity+category:name:android.intent.category.DEFAULT
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:13:13-16:29
+action#com.itgz8.scancode.BarcodeScanningActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:14:17-84
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:14:25-82
+category#android.intent.category.DEFAULT
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:15:17-75
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:15:27-73
+provider#androidx.core.content.FileProvider
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:9-20:20
+	android:grantUriPermissions
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:146-180
+	android:authorities
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:69-120
+	android:exported
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:121-145
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:19-68
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:19:13-111
+	android:resource
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:19:75-109
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:19:24-74
+uses-sdk
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml

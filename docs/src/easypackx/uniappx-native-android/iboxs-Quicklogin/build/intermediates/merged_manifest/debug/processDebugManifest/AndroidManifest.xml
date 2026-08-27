@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="uts.sdk.modules.iboxsQuicklogin" >
+
+    <uses-sdk android:minSdkVersion="21" />
+    <!-- Required -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- Optional -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 用于开启 debug 版本的应用在 6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.hihonor.android.launcher.permission.CHANGE_BADGE" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
+    <!-- 地理位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!-- 应用列表 -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <application android:networkSecurityConfig="@xml/network_security_config" >
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity
+            android:name="com.cmic.gen.sdk.view.GenLoginAuthActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="unspecified"
+            android:theme="@style/ActivityDialogStyle" />
+        <activity
+            android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityDialogStyle" >
+        </activity>
+        <activity
+            android:name="cn.jiguang.verifysdk.CtLoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityDialogStyle"
+            tools:replace="android:screenOrientation" >
+        </activity>
+    </application>
+
+</manifest>

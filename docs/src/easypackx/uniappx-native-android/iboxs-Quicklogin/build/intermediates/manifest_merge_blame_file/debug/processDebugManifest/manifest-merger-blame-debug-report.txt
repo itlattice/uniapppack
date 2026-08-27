@@ -1,0 +1,107 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.iboxsQuicklogin" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7    <!-- Required -->
+8    <uses-permission android:name="android.permission.INTERNET" />
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:4:5-66
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:4:22-64
+9    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:5:5-78
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:5:22-76
+10    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:6:5-75
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:6:22-73
+11    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:7:5-78
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:7:22-76
+12    <!-- Optional -->
+13    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:9:5-77
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:9:22-75
+14    <!-- 用于开启 debug 版本的应用在 6.0 系统上 层叠窗口权限 -->
+15    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:11:5-75
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:11:22-73
+16    <uses-permission android:name="android.permission.VIBRATE" />
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:12:5-65
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:12:22-63
+17    <uses-permission android:name="android.permission.WAKE_LOCK" />
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:13:5-67
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:13:22-65
+18    <uses-permission android:name="com.hihonor.android.launcher.permission.CHANGE_BADGE" />
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:14:5-91
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:14:22-89
+19    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+19-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:15:5-90
+19-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:15:22-88
+20    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:16:5-82
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:16:22-80
+21    <!-- 地理位置 -->
+22    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+22-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:18:5-80
+22-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:18:22-78
+23    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+23-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:19:5-78
+23-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:19:22-76
+24    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+24-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:20:5-84
+24-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:20:22-82
+25    <!-- 应用列表 -->
+26    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+26-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:22:5-76
+26-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:22:22-74
+27
+28    <application android:networkSecurityConfig="@xml/network_security_config" >
+28-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:23:5-30:19
+28-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:23:18-78
+29        <service android:name="com.amap.api.location.APSService" />
+29-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:24:9-67
+29-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:24:18-65
+30
+31        <activity
+31-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:9-254
+32            android:name="com.cmic.gen.sdk.view.GenLoginAuthActivity"
+32-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:19-76
+33            android:configChanges="orientation|keyboardHidden|screenSize"
+33-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:77-138
+34            android:launchMode="singleTop"
+34-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:139-169
+35            android:screenOrientation="unspecified"
+35-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:170-209
+36            android:theme="@style/ActivityDialogStyle" />
+36-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:210-252
+37        <activity
+37-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:9-27:20
+38            android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+38-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:19-77
+39            android:configChanges="orientation|keyboardHidden|screenSize"
+39-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:121-182
+40            android:launchMode="singleTop"
+40-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:220-250
+41            android:screenOrientation="portrait"
+41-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:183-219
+42            android:theme="@style/ActivityDialogStyle" >
+42-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:78-120
+43        </activity>
+44        <activity
+44-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:9-29:20
+45            android:name="cn.jiguang.verifysdk.CtLoginActivity"
+45-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:19-70
+46            android:configChanges="orientation|keyboardHidden|screenSize"
+46-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:71-132
+47            android:launchMode="singleTop"
+47-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:213-243
+48            android:screenOrientation="portrait"
+48-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:176-212
+49            android:theme="@style/ActivityDialogStyle"
+49-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:133-175
+50            tools:replace="android:screenOrientation" >
+50-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:244-285
+51        </activity>
+52    </application>
+53
+54</manifest>

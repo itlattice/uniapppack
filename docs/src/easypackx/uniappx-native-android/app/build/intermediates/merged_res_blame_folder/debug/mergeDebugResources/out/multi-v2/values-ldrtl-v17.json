@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "cn.testapp.app-mergeDebugResources-91:/values-ldrtl-v17/values-ldrtl-v17.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\zqu10\\.gradle\\caches\\8.14.3\\transforms\\35749e7c2f52a049f4c7ee2e3f2ac353\\transformed\\material-1.11.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,191",
+                        "endColumns": "135,140",
+                        "endOffsets": "186,327"
+                    },
+                    "to": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,242",
+                        "endColumns": "135,140",
+                        "endOffsets": "237,378"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zqu10\\.gradle\\caches\\8.14.3\\transforms\\1f6925907448ab529e3a04846ec294d2\\transformed\\jetified-uniappV8-4.85\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "50",
+                        "endOffsets": "101"
+                    }
+                }
+            ]
+        }
+    ]
+}

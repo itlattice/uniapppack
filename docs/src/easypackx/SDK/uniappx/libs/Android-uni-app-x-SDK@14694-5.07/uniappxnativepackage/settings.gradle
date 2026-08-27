@@ -1,0 +1,45 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven {url 'https://maven.aliyun.com/repository/gradle-plugin'}
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        // JitPack 远程仓库：https://jitpack.io
+        maven { url 'https://jitpack.io' }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        flatDir { dirs('../plugins/') }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven {url 'https://maven.aliyun.com/repository/central'}
+        maven {url 'https://maven.aliyun.com/repository/gradle-plugin'}
+        maven { url = uri("https://jitpack.io") }
+        google()
+        mavenCentral()
+        maven {url 'https://developer.huawei.com/repo/'}
+        maven {
+            url 'https://mvn.getui.com/nexus/content/repositories/releases'
+        }
+    }
+}
+
+rootProject.name = "uniappx-native-package"
+include ':app'
+include ':uniappx'
+include ':test-invoke-network-api'
+include ':uni-getbatteryinfo'
+include ':uts-openSchema'
+include ':uts-progressNotification'
+include ':app-comm'
+include ':uts-get-native-view'
+include ':uni-stat'
+include ':native-button'
+include ':native-time-picker'
+include ':uni-openLocation'
+include ':uts-button'
+include ':uni-usercapturescreen'
+include ':uts-worker'

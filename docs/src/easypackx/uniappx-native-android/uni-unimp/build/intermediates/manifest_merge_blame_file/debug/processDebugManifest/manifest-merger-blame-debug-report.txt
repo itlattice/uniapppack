@@ -1,0 +1,50 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.uniUnimp" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7
+8    <application>
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:3:5-12:19
+9        <activity
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:9-11:20
+10            android:name="io.dcloud.PandoraEntryActivity"
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:19-64
+11            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard"
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:65-153
+12            android:exported="false"
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:221-245
+13            android:hardwareAccelerated="true"
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:154-188
+14            android:launchMode="singleTask"
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:189-220
+15            android:permission="com.miui.securitycenter.permission.AppPermissionsEditor"
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:246-322
+16            android:screenOrientation="user"
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:323-355
+17            android:theme="@style/DCloudTheme"
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:356-390
+18            android:windowSoftInputMode="adjustResize" >
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:391-433
+19            <intent-filter>
+19-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:5:13-10:29
+20                <category android:name="android.intent.category.DEFAULT" />
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:6:17-75
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:6:27-73
+21                <category android:name="android.intent.category.BROWSABLE" />
+21-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:7:17-77
+21-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:7:27-75
+22
+23                <action android:name="android.intent.action.VIEW" />
+23-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:8:17-68
+23-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:8:25-66
+24
+25                <data android:scheme="h56131bcf" />
+25-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:9:17-51
+25-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:9:23-49
+26            </intent-filter>
+27        </activity>
+28    </application>
+29
+30</manifest>

@@ -1,0 +1,37 @@
+.goodscard{
+	padding-bottom: 9px;
+	padding-left: 0;
+	padding-right: 0;
+	.titlebox{
+		height: 23px;
+		padding-left: 12px;
+		padding-right: 6px;
+		border-bottom: 1px solid #f5f5f5;
+		.title{
+			color: #4D4D4D;
+			font-size: 13px;
+			line-height: 23px;
+		}
+		.static{
+			.piecenum{
+				font-size: 13px;
+				color: #454545;
+				line-height: 23px;
+			}
+			.yugunum{
+				padding-left:20rpx;
+				padding-top: 3px;
+				.t{
+					line-height: 23px;
+					font-size: 13px;
+					color: black;
+				}
+				.num{
+					line-height: 23px;
+					font-size: 13px;
+					color: #ff7700;
+				}
+			}
+		}
+	}
+}

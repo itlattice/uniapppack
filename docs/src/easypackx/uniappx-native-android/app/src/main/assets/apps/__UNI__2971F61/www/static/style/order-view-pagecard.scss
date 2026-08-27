@@ -1,0 +1,24 @@
+.pagecard{
+	padding-bottom: 4px;
+	padding-left: 27rpx;
+	padding-right: 21rpx;
+	margin-bottom: 6px;
+	.lineitem{
+		height: 30px;
+		border-bottom: 1px solid #f5f5f5;
+		.pagedata{
+			.title{
+				width: 125rpx;
+				text-align: right;
+				line-height: 30px;
+				font-size: 13px;
+				color: #ABABAB;
+			}
+			.content{
+				line-height: 30px;
+				padding-left: 29rpx;
+				font-size: 13px;
+			}
+		}
+	}
+}

@@ -1,0 +1,82 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.iboxsScancode" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7
+8    <uses-feature
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:3:5-84
+9        android:name="android.hardware.camera"
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:3:19-57
+10        android:required="false" />
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:3:58-82
+11
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:4:5-80
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:4:22-78
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:5:5-64
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:5:22-62
+14    <uses-permission android:name="android.permission.FLASHLIGHT" />
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:6:5-68
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:6:22-66
+15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:7:5-79
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:7:22-77
+16    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:8:5-75
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:8:22-73
+17    <uses-permission android:name="android.permission.VIBRATE" />
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:9:5-65
+17-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:9:22-63
+18    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:10:5-81
+18-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:10:22-79
+19
+20    <application
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:11:5-21:19
+21        android:allowBackup="true"
+21-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:11:18-44
+22        android:supportsRtl="true" >
+22-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:11:45-71
+23        <activity
+23-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:9-17:20
+24            android:name="com.itgz8.scancode.BarcodeScanningActivity"
+24-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:19-76
+25            android:exported="true"
+25-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:109-132
+26            android:launchMode="singleTask" >
+26-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:12:77-108
+27            <intent-filter>
+27-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:13:13-16:29
+28                <action android:name="com.itgz8.scancode.BarcodeScanningActivity" />
+28-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:14:17-84
+28-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:14:25-82
+29
+30                <category android:name="android.intent.category.DEFAULT" />
+30-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:15:17-75
+30-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:15:27-73
+31            </intent-filter>
+32        </activity>
+33
+34        <provider
+34-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:9-20:20
+35            android:name="androidx.core.content.FileProvider"
+35-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:19-68
+36            android:authorities="${applicationId}.fileprovider"
+36-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:69-120
+37            android:exported="false"
+37-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:121-145
+38            android:grantUriPermissions="true" >
+38-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:18:146-180
+39            <meta-data
+39-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:19:13-111
+40                android:name="android.support.FILE_PROVIDER_PATHS"
+40-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:19:24-74
+41                android:resource="@xml/file_paths" />
+41-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-scancode\src\main\AndroidManifest.xml:19:75-109
+42        </provider>
+43    </application>
+44
+45</manifest>

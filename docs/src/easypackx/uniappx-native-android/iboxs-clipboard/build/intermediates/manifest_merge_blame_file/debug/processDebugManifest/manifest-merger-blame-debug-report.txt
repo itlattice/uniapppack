@@ -1,0 +1,14 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="cn.limeui.clipboard" >
+4
+5    <uses-sdk android:minSdkVersion="21" />
+6
+7    <uses-permission android:name="android.permission.READ_CLIPBOARD_IN_BACKGROUND" />
+7-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-clipboard\src\main\AndroidManifest.xml:3:5-86
+7-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-clipboard\src\main\AndroidManifest.xml:3:22-84
+8    <uses-permission android:name="android.permission.WRITE_CLIPBOARD_IN_BACKGROUND" />
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-clipboard\src\main\AndroidManifest.xml:4:5-87
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-clipboard\src\main\AndroidManifest.xml:4:22-85
+9
+10</manifest>

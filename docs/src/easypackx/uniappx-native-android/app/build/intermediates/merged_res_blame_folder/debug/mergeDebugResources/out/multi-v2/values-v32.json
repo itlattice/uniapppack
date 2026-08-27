@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "cn.testapp.app-mergeDebugResources-91:/values-v32/values-v32.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\zqu10\\.gradle\\caches\\8.14.3\\transforms\\ac3e40edff8ab980e12250f4a78bcd0f\\transformed\\jetified-DCUniMPSDK-4.85\\res\\values-v32\\values-v32.xml",
+                    "from": {
+                        "startLines": "2,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "100,474",
+                        "endLines": "7,17",
+                        "endColumns": "12,12",
+                        "endOffsets": "469,1112"
+                    }
+                }
+            ]
+        }
+    ]
+}

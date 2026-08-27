@@ -104,6 +104,8 @@
     "files": [
       "dist/**/*",
       "dist-electron/**/*",
+      "src/pack/**/*",
+      "docs/src/easypackx/**/*",
       "public/resources",
       "package.json"
     ],
@@ -124,12 +126,6 @@
       "shortcutName": "UniAPP打包机",
       "runAfterFinish": true
     },
-    "publish": [
-      {
-        "provider": "generic",
-        "url": "https://cash.fresh361.com/electron/"
-      }
-    ],
     "asar": true,
     "win": {
       "icon": "build/icons/icon.ico",

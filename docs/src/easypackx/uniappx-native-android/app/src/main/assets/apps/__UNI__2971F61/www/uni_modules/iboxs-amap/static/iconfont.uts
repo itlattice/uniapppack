@@ -1,0 +1,18 @@
+export default {
+	"checkbox": "\ue637",
+	"checkboxoutlineblank":"\ue63c",
+	"jiantou_xiangzuo":"\ueb09",
+	"gundongtiao":"\ue62d",
+	"gundongtiao2":"\ueb0a",
+	"close":"\ue6d5",
+	"youxiajiao":"\ue634",
+	"xiangxia":"\ue66f",
+	"xiangshang":"\ue600",
+	"gougou":"\ue651",
+	"zhaoxiangji":"\ue601",
+	"chacha":"\ue62f",
+	"dingwei":"\ue93f",
+	"sousuo":"\ue633",
+	"xiangzuo1":"\ue779",
+	"daohang":"\ue66c"
+} as UTSJSONObject;

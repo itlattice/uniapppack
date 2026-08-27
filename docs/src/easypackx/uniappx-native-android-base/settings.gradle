@@ -1,0 +1,29 @@
+pluginManagement {
+	repositories {
+		maven { url 'https://maven.aliyun.com/repository/google' }
+		maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+		gradlePluginPortal()
+		google()
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
+	}
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        flatDir {
+            dirs('./plugins/')
+        }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url = uri("https://jitpack.io") }
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "easypackx-base"
+include ':app'
+include ':uniappx'
+include ':uni-modules-base'

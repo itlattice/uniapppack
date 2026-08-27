@@ -1,0 +1,124 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:2:1-31:12
+	package
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:2:70-116
+	xmlns:android
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:4:5-66
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:4:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:5:5-78
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:5:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:6:5-75
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:6:22-73
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:7:5-78
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:7:22-76
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:9:5-77
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:9:22-75
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:11:5-75
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:11:22-73
+uses-permission#android.permission.VIBRATE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:12:5-65
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:12:22-63
+uses-permission#android.permission.WAKE_LOCK
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:13:5-67
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:13:22-65
+uses-permission#com.hihonor.android.launcher.permission.CHANGE_BADGE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:14:5-91
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:14:22-89
+uses-permission#com.huawei.android.launcher.permission.CHANGE_BADGE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:15:5-90
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:15:22-88
+uses-permission#com.vivo.notification.permission.BADGE_ICON
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:16:5-82
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:16:22-80
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:18:5-80
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:18:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:19:5-78
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:19:22-76
+uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:20:5-84
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:20:22-82
+uses-permission#android.permission.QUERY_ALL_PACKAGES
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:22:5-76
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:22:22-74
+application
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:23:5-30:19
+	android:networkSecurityConfig
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:23:18-78
+service#com.amap.api.location.APSService
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:24:9-67
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:24:18-65
+activity#com.cmic.gen.sdk.view.GenLoginAuthActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:9-254
+	android:screenOrientation
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:170-209
+	android:launchMode
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:139-169
+	android:configChanges
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:77-138
+	android:theme
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:210-252
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:25:19-76
+activity#com.cmic.sso.sdk.activity.LoginAuthActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:9-27:20
+	android:screenOrientation
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:183-219
+	android:launchMode
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:220-250
+	android:configChanges
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:121-182
+	android:theme
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:78-120
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:26:19-77
+activity#cn.jiguang.verifysdk.CtLoginActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:9-29:20
+	android:screenOrientation
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:176-212
+	android:launchMode
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:213-243
+	android:configChanges
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:71-132
+	android:theme
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:133-175
+	tools:replace
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:244-285
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml:28:19-70
+uses-sdk
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Quicklogin\src\main\AndroidManifest.xml

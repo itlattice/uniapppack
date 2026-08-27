@@ -311,6 +311,7 @@ const androidKeystore=ref('');  //安卓证书文件
 const androidKeyAlias=ref('');  //安卓证书别名
 const androidKeyPassword=ref('');  //安卓证书库密码
 const androidKeyPwd=ref(''); //安卓证书密码
+const androidNativeLibPickFirsts=ref('');
 const iosBundleId=ref('');
 const iosChannel=ref('appstore');
 const iosUnionid=ref('');

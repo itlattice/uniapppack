@@ -1,0 +1,12 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="io.dcloud.uni_modules.xNetworkChange" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7
+8    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\tmx-network-change\src\main\AndroidManifest.xml:3:5-78
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\tmx-network-change\src\main\AndroidManifest.xml:3:22-76
+9
+10</manifest>

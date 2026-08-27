@@ -1,0 +1,58 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:2:1-13:12
+	package
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:2:70-116
+	xmlns:android
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:3:5-12:19
+activity#io.dcloud.PandoraEntryActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:9-11:20
+	android:screenOrientation
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:323-355
+	android:launchMode
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:189-220
+	android:hardwareAccelerated
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:154-188
+	android:windowSoftInputMode
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:391-433
+	android:exported
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:221-245
+	android:permission
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:246-322
+	android:configChanges
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:65-153
+	android:theme
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:356-390
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:4:19-64
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:h56131bcf
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:5:13-10:29
+category#android.intent.category.DEFAULT
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:6:17-75
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:6:27-73
+category#android.intent.category.BROWSABLE
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:7:17-77
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:7:27-75
+action#android.intent.action.VIEW
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:8:17-68
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:8:25-66
+data
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:9:17-51
+	android:scheme
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml:9:23-49
+uses-sdk
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uni-unimp\src\main\AndroidManifest.xml

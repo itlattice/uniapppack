@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="uts.sdk.modules.uniUnimp" >
+
+    <uses-sdk android:minSdkVersion="21" />
+
+    <application>
+        <activity
+            android:name="io.dcloud.PandoraEntryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:permission="com.miui.securitycenter.permission.AppPermissionsEditor"
+            android:screenOrientation="user"
+            android:theme="@style/DCloudTheme"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:scheme="h56131bcf" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

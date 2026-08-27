@@ -1,0 +1,62 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:2:1-11:12
+	package
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:2:70-116
+	xmlns:android
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:3:5-10:19
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:3:18-64
+activity#io.dcloud.uniapp.UniAppActivity
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:9-5:20
+	android:screenOrientation
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:229-265
+	android:windowSoftInputMode
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:319-361
+	android:exported
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:205-228
+	android:configChanges
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:66-204
+	android:theme
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:266-318
+	tools:replace
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:362-484
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:19-65
+meta-data#DCLOUD_UNI_APPID
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:6:9-84
+	android:value
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:6:52-82
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:6:20-51
+meta-data#DCLOUD_CHANNEL
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:7:9-68
+	android:value
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:7:50-66
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:7:20-49
+meta-data#TencentMapSDK
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:8:9-67
+	android:value
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:8:49-65
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:8:20-48
+meta-data#DCLOUD_DEBUG
+ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:9:9-70
+	android:value
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:9:48-68
+	android:name
+		ADDED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:9:20-47
+uses-sdk
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml
+INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml

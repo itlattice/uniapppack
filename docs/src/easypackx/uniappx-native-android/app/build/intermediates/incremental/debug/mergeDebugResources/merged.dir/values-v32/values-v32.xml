@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <style name="DCloudTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorEdgeEffect">#333333</item>
+        <item name="android:windowBackground">@color/ime_background</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" ns1:targetApi="35">true</item>
+    </style>
+    <style name="UniMPTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/Null_Animation</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" ns1:targetApi="35">true</item>
+    </style>
+</resources>

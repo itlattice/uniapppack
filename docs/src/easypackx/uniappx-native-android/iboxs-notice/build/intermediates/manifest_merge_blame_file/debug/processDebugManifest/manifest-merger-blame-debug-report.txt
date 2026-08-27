@@ -1,0 +1,25 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="uts.sdk.modules.iboxsNotice" >
+4
+5    <uses-sdk android:minSdkVersion="21" />
+6
+7    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+7-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:2:5-77
+7-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:2:22-75
+8    <uses-permission android:name="android.permission.VIBRATE" />
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:3:5-65
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:3:22-63
+9    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:4:5-76
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:4:22-74
+10
+11    <application
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:5:5-6:19
+12        android:allowBackup="true"
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:5:18-44
+13        android:supportsRtl="true" >
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-notice\src\main\AndroidManifest.xml:5:45-71
+14    </application>
+15
+16</manifest>

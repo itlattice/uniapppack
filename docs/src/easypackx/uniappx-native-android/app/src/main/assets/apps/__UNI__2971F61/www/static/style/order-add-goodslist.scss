@@ -1,0 +1,86 @@
+.list{
+	
+	.item{
+		.basicdata{
+			border-bottom:1px solid #F5F5F5;
+			height: 20px;
+			.nameinfo{
+				.name{
+					max-width: 450rpx;
+					font-size: 12px;
+					line-height: 18px;
+				}
+			}
+			.stock{
+				line-height: 18px;
+				font-size: 12px;
+				color: #919191;
+			}
+		}
+		.priceinfo{
+			padding-top: 3px;
+			border-bottom:1px solid #F5F5F5;
+			margin-bottom: 6px;
+			height: 20px;
+			.xiangxiaicon{
+				margin-top: 1px;
+			}
+			.remark{
+				.tagbox{
+					width: 30px;
+					height: 16px;
+					border-radius: 2px;
+					border: 1px solid #1776FC;
+					font-size: 11px;
+					line-height: 14px;
+				}
+				.overline{
+					max-width: 250rpx;
+					font-size: 11px;
+					margin-left: 10rpx;
+					color: #919191;
+				}
+			}
+			.priceinfocontent{
+				.price{
+					// padding-top: 3px;
+					.input{
+						font-size: 12px;
+						color: #FF5029;
+					}
+					.yugu{
+						font-size: 12px;
+					}
+				}
+				.number{
+					margin-left: 20rpx;
+					font-size: 12px;
+				}
+			}
+		}
+		.updateinput{
+			background: #EBEBEB;
+			width: 710rpx;
+			margin-left: 20rpx;
+			height: 54px;
+			margin-bottom: 10px;
+			.titles{
+				.title{
+					width: 33.3%;
+					font-size: 12px;
+				}
+			}
+			.inputs{
+				margin-left: 3.3%;
+				.input{
+					width: 30%;
+					margin-right: 3.3%;
+					font-size: 12px;
+					background: white;
+					height: 22px;
+					border-bottom: 1px solid #1776FC;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,55 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="cn.uvuejs.uniappx" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7
+8    <application android:name="io.dcloud.uniapp.UniApplication" >
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:3:5-10:19
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:3:18-64
+9        <activity
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:9-5:20
+10            android:name="io.dcloud.uniapp.UniAppActivity"
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:19-65
+11            android:configChanges="orientation|keyboard|keyboardHidden|smallestScreenSize|screenLayout|screenSize|mcc|mnc|fontScale|navigation|uiMode"
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:66-204
+12            android:exported="true"
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:205-228
+13            android:screenOrientation="portrait"
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:229-265
+14            android:theme="@style/UniAppX.Activity.DefaultTheme"
+14-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:266-318
+15            android:windowSoftInputMode="adjustResize"
+15-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:319-361
+16            tools:replace="android:exported,android:theme,android:configChanges,android:windowSoftInputMode,android:screenOrientation" >
+16-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:4:362-484
+17        </activity>
+18
+19        <meta-data
+19-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:6:9-84
+20            android:name="DCLOUD_UNI_APPID"
+20-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:6:20-51
+21            android:value="__UNI__2971F61" />
+21-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:6:52-82
+22        <meta-data
+22-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:7:9-68
+23            android:name="DCLOUD_CHANNEL"
+23-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:7:20-49
+24            android:value="" />
+24-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:7:50-66
+25        <meta-data
+25-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:8:9-67
+26            android:name="TencentMapSDK"
+26-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:8:20-48
+27            android:value="" />
+27-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:8:49-65
+28        <meta-data
+28-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:9:9-70
+29            android:name="DCLOUD_DEBUG"
+29-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:9:20-47
+30            android:value="true" />
+30-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\uniappx\src\main\AndroidManifest.xml:9:48-68
+31    </application>
+32
+33</manifest>

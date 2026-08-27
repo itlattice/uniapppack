@@ -1,0 +1,27 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.iboxsChooseMedia" >
+5
+6    <uses-sdk android:minSdkVersion="19" />
+7
+8    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:3:5-80
+8-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:3:22-78
+9    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:4:5-79
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:4:22-77
+10    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:5:5-75
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:5:22-73
+11    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:6:5-74
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:6:22-72
+12    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:7:5-74
+12-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:7:22-72
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:8:5-64
+13-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-choosemedia\src\main\AndroidManifest.xml:8:22-62
+14
+15</manifest>

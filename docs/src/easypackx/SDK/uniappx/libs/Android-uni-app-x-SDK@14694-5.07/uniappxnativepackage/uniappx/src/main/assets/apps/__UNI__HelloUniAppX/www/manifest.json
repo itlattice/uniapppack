@@ -1,0 +1,105 @@
+{
+  "id": "__UNI__HelloUniAppX",
+  "name": "Hello uni-app x",
+  "description": "",
+  "version": {
+    "name": "2.0.2",
+    "code": 20002
+  },
+  "uni-app-x": {
+    "vapor": true,
+    "styleIsolationVersion": "2",
+    "compilerVersion": "5.02"
+  },
+  "app-android": {
+    "distribute": {
+      "modules": {
+        "uni-payment": {
+          "alipay": {},
+          "wxpay": {}
+        },
+        "uni-location": {
+          "system": {},
+          "tencent": {}
+        },
+        "uni-push": {},
+        "uni-map": {
+          "tencent": {}
+        },
+        "uni-makePhoneCall": {},
+        "uni-storage": {},
+        "uni-privacy": {},
+        "uni-prompt": {},
+        "uni-shareWithSystem": {},
+        "uni-fileSystemManager": {},
+        "uni-media": {},
+        "uni-keyboard": {},
+        "uni-getSystemSetting": {},
+        "uni-rpx2px": {},
+        "uni-network": {},
+        "uni-getBackgroundAudioManager": {},
+        "uni-dialogPage": {},
+        "uni-camera": {},
+        "uni-event": {},
+        "uni-websocket": {},
+        "uni-getSystemInfo": {},
+        "uni-sse": {},
+        "uni-getProvider": {},
+        "uni-ad": {},
+        "uni-createInnerAudioContext": {},
+        "uni-chooseMedia": {},
+        "uni-facialVerify": {},
+        "uni-theme": {},
+        "uni-chooseLocation": {},
+        "uni-getAppAuthorizeSetting": {},
+        "uni-base64ToArrayBuffer": {},
+        "uni-getNetworkType": {},
+        "uni-actionSheet": {},
+        "uni-showLoading": {},
+        "uni-arrayBufferToBase64": {},
+        "uni-video": {},
+        "uni-openDocument": {},
+        "uni-requestMerchantTransfer": {},
+        "uni-previewImage": {},
+        "uni-verify": {},
+        "uni-scanCode": {},
+        "uni-getAppBaseInfo": {},
+        "uni-exit": {},
+        "uni-canvas-dom2": {},
+        "uni-clipboard": {},
+        "uni-live-player": {},
+        "uni-live-pusher": {},
+        "uni-openAppAuthorizeSetting": {},
+        "uni-installApk": {},
+        "uni-recorder": {},
+        "uni-modal": {},
+        "uni-getDeviceInfo": {},
+        "uni-getAccessibilityInfo": {},
+        "uni-map-tencent": {},
+        "uni-web-view": {},
+        "uni-getElementById": {},
+        "uni-createRequestPermissionListener": {},
+        "uni-cloud-client": {},
+        "uni-crash": {},
+        "uni-page-container": {},
+        "uni-match-media": {},
+        "uni-rich-text": {},
+        "uni-loading": {},
+        "uni-canvas": {}
+      },
+      "icons": {
+        "xxhdpi": "package/icon144.png",
+        "xxxhdpi": "package/icon192.png"
+      },
+      "splashScreens": {
+        "default": {}
+      },
+      "_uni-app-x_": {
+        "pageOrientation": "portrait"
+      },
+      "globalStyle": {
+        "pageOrientation": "portrait"
+      }
+    }
+  }
+}

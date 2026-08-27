@@ -1,0 +1,19 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="uts.sdk.modules.iboxsBiometric" >
+5
+6    <uses-sdk android:minSdkVersion="21" />
+7    <!-- 按下面方式配置需要自定义添加的权限 -->
+8    <!-- 使用网络权限 -->
+9    <uses-permission android:name="android.permission.INTERNET" />
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Biometric\src\main\AndroidManifest.xml:5:5-66
+9-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Biometric\src\main\AndroidManifest.xml:5:22-64
+10    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Biometric\src\main\AndroidManifest.xml:6:5-73
+10-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Biometric\src\main\AndroidManifest.xml:6:22-71
+11    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Biometric\src\main\AndroidManifest.xml:7:5-71
+11-->D:\HBuilderX\plugins\wj-easypackx\src\easypackx\uniappx-native-android\iboxs-Biometric\src\main\AndroidManifest.xml:7:22-69
+12
+13</manifest>

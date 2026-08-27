@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="abc_action_bar_embed_tabs">false</bool>
+    <dimen name="dtf_toyger_circle_surfaceview_height">423dip</dimen>
+    <dimen name="dtf_toyger_circle_surfaceview_width">238dip</dimen>
+    <dimen name="dtf_toyger_circle_tips_margin_top">60dip</dimen>
+    <dimen name="dtf_toyger_loading_padding_top">194dip</dimen>
+    <dimen name="dtf_toyger_near_far_main_scan_margin_top">102dip</dimen>
+    <dimen name="dtf_toyger_near_far_tip_margin_top">70dp</dimen>
+    <dimen name="dtf_toyger_toger_main_scan_frame_margin_top">0dip</dimen>
+</resources>

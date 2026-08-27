@@ -1,0 +1,41 @@
+pluginManagement {
+	repositories {
+		maven { url 'https://maven.aliyun.com/repository/google' }
+		maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+		gradlePluginPortal()
+		google()
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
+		{{#each repositories.maven}}
+		maven { url '{{this}}' }
+		{{/each}}
+	}
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        flatDir {
+            dirs('./plugins/')
+        }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url = uri("https://jitpack.io") }
+        google()
+        mavenCentral()
+		maven { url = uri("https://developer.huawei.com/repo/") }
+		maven { url = uri("https://android-sdk.is.com/") }
+		maven { url = uri("https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea") }
+		maven { url = uri("https://oss.sonatype.org/content/groups/public") }
+		{{#each repositories.maven}}
+		maven { url '{{this}}' }
+		{{/each}}
+    }
+}
+rootProject.name = "{{appName}}-app"
+include ':app'
+include ':uniappx'
+{{#each plugins}}
+include '{{this}}'
+{{/each}}

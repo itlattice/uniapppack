@@ -1,0 +1,67 @@
+pluginManagement {
+	repositories {
+		maven { url 'https://maven.aliyun.com/repository/google' }
+		maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+		gradlePluginPortal()
+		google()
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
+	}
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        flatDir {
+            dirs('./plugins/')
+        }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url = uri("https://jitpack.io") }
+        google()
+        mavenCentral()
+		maven { url = uri("https://developer.huawei.com/repo/") }
+		maven { url = uri("https://android-sdk.is.com/") }
+		maven { url = uri("https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea") }
+		maven { url = uri("https://oss.sonatype.org/content/groups/public") }
+    }
+}
+rootProject.name = "超市管理-app"
+include ':app'
+include ':uniappx'
+include ':iboxs-amap'
+include ':iboxs-Biometric'
+include ':iboxs-BleBluetooth'
+include ':iboxs-Bluetooth'
+include ':iboxs-choosemedia'
+include ':iboxs-clipboard'
+include ':iboxs-common'
+include ':iboxs-docscan'
+include ':iboxs-Nfc'
+include ':iboxs-notice'
+include ':iboxs-ocr'
+include ':iboxs-performance'
+include ':iboxs-qcloudCos'
+include ':iboxs-Quicklogin'
+include ':iboxs-scancode'
+include ':iboxs-sqlite'
+include ':iboxs-tpop'
+include ':iboxs-tts'
+include ':iboxs-Zimfacade'
+include ':kux-broadcast-receiver'
+include ':lime-pdf'
+include ':lime-svg'
+include ':tmx-call-phone'
+include ':tmx-crypto-s'
+include ':tmx-loading-s'
+include ':tmx-modal-s'
+include ':tmx-network-change'
+include ':tmx-texttovoice-s'
+include ':tmx-tips-s'
+include ':tmx-toast-s'
+include ':uni-MemoryInfo'
+include ':uni-unimp'
+include ':uni-usercapturescreen'
+include ':x-md5'
+include ':x-uuid'

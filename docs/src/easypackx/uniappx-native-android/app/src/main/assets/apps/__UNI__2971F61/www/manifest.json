@@ -1,0 +1,68 @@
+{
+  "id": "__UNI__2971F61",
+  "name": "超市管理",
+  "description": "超市系统管理手持终端",
+  "version": {
+    "name": "1.0.0",
+    "code": 1
+  },
+  "uni-app-x": {
+    "compilerVersion": "5.07"
+  },
+  "app-android": {
+    "distribute": {
+      "abiFilters": [
+        "x86_64",
+        "arm64-v8a",
+        "armeabi-v7a",
+        "x86"
+      ],
+      "dependencies": [
+        "com.amap.api:3dmap:latest.integration",
+        "com.amap.api:navi-3dmap:latest.integration",
+        "com.amap.api:search:latest.integration",
+        "com.amap.api:location:latest.integration",
+        "com.caverock:androidsvg-aar:1.4",
+        "io.dcloud.uniapp.extapi.UniMediaKt"
+      ],
+      "modules": {
+        "uni-canvas-dom2": {},
+        "uni-camera": {},
+        "uni-installApk": {},
+        "uni-event": {},
+        "uni-getSystemInfo": {},
+        "uni-media": {},
+        "uni-storage": {},
+        "uni-theme": {},
+        "uni-prompt": {},
+        "uni-shareWithSystem": {},
+        "uni-fileSystemManager": {},
+        "uni-network": {},
+        "uni-rpx2px": {},
+        "uni-getAppBaseInfo": {},
+        "uni-web-view": {},
+        "uni-exit": {},
+        "uni-getDeviceInfo": {},
+        "uni-getNetworkType": {},
+        "uni-showLoading": {},
+        "uni-websocket": {},
+        "uni-getElementById": {},
+        "uni-makePhoneCall": {},
+        "uni-video": {},
+        "uni-canvas": {}
+      },
+      "icons": {
+        "hdpi": "unpackage/res/icons/72x72.png",
+        "xhdpi": "unpackage/res/icons/96x96.png",
+        "xxhdpi": "unpackage/res/icons/144x144.png",
+        "xxxhdpi": "unpackage/res/icons/192x192.png"
+      },
+      "splashScreens": {
+        "default": {}
+      },
+      "targetSdkVersion": "33",
+      "schemes": "pdaapp",
+      "minSdkVersion": "23"
+    }
+  }
+}

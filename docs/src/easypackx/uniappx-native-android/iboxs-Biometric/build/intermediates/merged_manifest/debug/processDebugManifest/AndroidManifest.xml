@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="uts.sdk.modules.iboxsBiometric" >
+
+    <uses-sdk android:minSdkVersion="21" />
+    <!-- 按下面方式配置需要自定义添加的权限 -->
+    <!-- 使用网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
+</manifest>
