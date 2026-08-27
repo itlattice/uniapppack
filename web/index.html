@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="懒猿 UniAPP 打包机 - 专业的 uni-app x 离线打包工具，支持 Android/iOS 可视化原生工程生成和打包">
+    <meta name="keywords" content="uni-app,uniapp,打包工具,离线打包,Android,iOS,Electron">
+    <title>懒猿 UniAPP 打包机 - 专业的 uni-app x 离线打包工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">🦥</span>
+                <span class="brand-text">懒猿 UniAPP 打包机</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">功能特性</a></li>
+                <li><a href="#workflow">使用流程</a></li>
+                <li><a href="#download">下载</a></li>
+                <li><a href="#docs">文档</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主视觉区 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">懒猿 UniAPP 打包机</span>
+                </h1>
+                <p class="hero-subtitle">专业的 uni-app x 和传统 uni-app 离线打包工具</p>
+                <p class="hero-description">
+                    基于 Electron + Vue 3 构建，提供可视化的 Android/iOS 原生工程生成和打包功能<br>
+                    告别繁琐的命令行操作，让打包变得简单高效
+                </p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">立即下载</a>
+                    <a href="#docs" class="btn btn-secondary">查看文档</a>
+                </div>
+                <div class="version-info">
+                    <span class="version-badge">v0.0.5</span>
+                    <span class="platform-badge">Windows</span>
+                    <span class="platform-badge">macOS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能特性 -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>uni-app x 支持</h3>
+                    <p>完整支持 uni-app x 项目打包</p>
+                    <ul class="feature-list">
+                        <li>Android: Gradle 完整构建流程</li>
+                        <li>iOS: 生成 Xcode 原生工程</li>
+                        <li>自动处理资源和依赖</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>可视化操作</h3>
+                    <p>友好的图形界面，告别命令行</p>
+                    <ul class="feature-list">
+                        <li>可视化配置界面</li>
+                        <li>项目配置自动保存</li>
+                        <li>多项目快速切换</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>高效打包</h3>
+                    <p>优化的打包流程，节省时间</p>
+                    <ul class="feature-list">
+                        <li>实时日志输出</li>
+                        <li>打包过程透明可控</li>
+                        <li>智能错误提示</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>灵活配置</h3>
+                    <p>支持多种打包场景</p>
+                    <ul class="feature-list">
+                        <li>自定义基座包</li>
+                        <li>正式发布包</li>
+                        <li>证书签名管理</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>安全可靠</h3>
+                    <p>本地打包，数据安全</p>
+                    <ul class="feature-list">
+                        <li>完全离线打包</li>
+                        <li>证书本地加密存储</li>
+                        <li>无需上传源码</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>持续更新</h3>
+                    <p>跟进最新技术栈</p>
+                    <ul class="feature-list">
+                        <li>支持最新 HBuilderX</li>
+                        <li>定期功能更新</li>
+                        <li>社区反馈快速响应</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用流程 -->
+    <section id="workflow" class="workflow">
+        <div class="container">
+            <h2 class="section-title">使用流程</h2>
+            <div class="workflow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>配置环境</h3>
+                        <p>首次使用时配置 HBuilderX、Android SDK、JDK 等开发环境路径</p>
+                    </div>
+                </div>
+                <div class="step-arrow">→</div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>准备项目</h3>
+                        <p>在 HBuilderX 中执行"发行 → 本地打包"生成资源文件</p>
+                    </div>
+                </div>
+                <div class="step-arrow">→</div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>配置打包</h3>
+                        <p>选择项目目录，填写包名、证书等打包配置信息</p>
+                    </div>
+                </div>
+                <div class="step-arrow">→</div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>开始打包</h3>
+                        <p>点击打包按钮，等待自动完成，实时查看日志输出</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术栈 -->
+    <section class="tech-stack">
+        <div class="container">
+            <h2 class="section-title">技术栈</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">Electron</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Vue 3</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔥</div>
+                    <div class="tech-name">Vite</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">Element Plus</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-name">Android SDK</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🍎</div>
+                    <div class="tech-name">iOS SDK</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载区域 -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">立即下载</h2>
+            <div class="download-cards">
+                <div class="download-card">
+                    <div class="download-icon">🪟</div>
+                    <h3>Windows 版本</h3>
+                    <p class="download-version">v0.0.5</p>
+                    <p class="download-requirement">Windows 10/11 x64</p>
+                    <a href="#" class="btn btn-download">下载安装包</a>
+                    <p class="download-size">约 120 MB</p>
+                </div>
+
+                <div class="download-card">
+                    <div class="download-icon">🍎</div>
+                    <h3>macOS 版本</h3>
+                    <p class="download-version">v0.0.5</p>
+                    <p class="download-requirement">macOS 10.15+</p>
+                    <a href="#" class="btn btn-download">即将推出</a>
+                    <p class="download-size">敬请期待</p>
+                </div>
+            </div>
+
+            <div class="system-requirements">
+                <h3>系统要求</h3>
+                <div class="requirements-grid">
+                    <div class="requirement-item">
+                        <strong>Node.js:</strong> ^20.19.0 或 ≥22.12.0
+                    </div>
+                    <div class="requirement-item">
+                        <strong>Android 打包:</strong> Android SDK + JDK 17 + Gradle
+                    </div>
+                    <div class="requirement-item">
+                        <strong>iOS 打包:</strong> macOS + Xcode（可选）
+                    </div>
+                    <div class="requirement-item">
+                        <strong>HBuilderX:</strong> 支持 uni-app x 的版本
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 文档区域 -->
+    <section id="docs" class="docs">
+        <div class="container">
+            <h2 class="section-title">文档与支持</h2>
+            <div class="docs-grid">
+                <div class="doc-card">
+                    <div class="doc-icon">📖</div>
+                    <h3>使用文档</h3>
+                    <p>详细的安装、配置和使用指南</p>
+                    <a href="#" class="doc-link">查看文档 →</a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-icon">💻</div>
+                    <h3>开发文档</h3>
+                    <p>架构说明和二次开发指南</p>
+                    <a href="#" class="doc-link">查看文档 →</a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-icon">❓</div>
+                    <h3>常见问题</h3>
+                    <p>常见问题解答和故障排除</p>
+                    <a href="#" class="doc-link">查看文档 →</a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-icon">🐛</div>
+                    <h3>反馈与支持</h3>
+                    <p>提交 Issue 和功能建议</p>
+                    <a href="#" class="doc-link">前往 GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">🦥</span>
+                    <span class="brand-text">懒猿 UniAPP 打包机</span>
+                </div>
+                <div class="footer-info">
+                    <p>让 uni-app 打包变得简单高效</p>
+                    <p class="copyright">© 2015-2024 fresh365.cn 版权所有</p>
+                    <p class="author">开发者: <strong>itlattice</strong> (IT格子)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
