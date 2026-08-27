@@ -1060,20 +1060,18 @@ async function updateTargetResources(target, dest) {
 }
 
 async function copyAppIcon(
-	hdpi,
+	iconSourcePath,
 	hdpiType = 'hdpi',
-	uniIconPath = path.join(uniappProjectPath, '/unpackage/res/icons/'),
 	appIconPath = path.join(targetDirectory, '/app/src/main/res/'),
 	iconName = 'ic_launcher'
 ) {
 	try {
-		const hdpiPngPath = path.join(uniIconPath, `${hdpi}x${hdpi}.png`);
-		if (fs.existsSync(hdpiPngPath)) {
+		if (iconSourcePath && fs.existsSync(iconSourcePath)) {
 			const hdpiWebpPath = path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.webp`);
 			if (fs.existsSync(hdpiWebpPath)) {
 				removeSyncWithRetry(hdpiWebpPath);
 			}
-			fsExtra.copyFileSync(hdpiPngPath, path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.png`));
+			fsExtra.copyFileSync(iconSourcePath, path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.png`));
 		}
 	} catch (e) {
 		throw e;
@@ -1109,36 +1107,71 @@ async function copyNativeResources(
 
 async function updateAppIcon() {
 	try {
-		const uniIconPath = path.join(uniappProjectPath, '/unpackage/res/icons/');
+		// 读取 manifest.json 获取图标配置
+		const manifestPath = path.join(appAndroidPath, APP_ID, '/www/', 'manifest.json');
+		const manifestJson = await fs.promises.readFile(manifestPath, 'utf-8');
+		const manifest = JSON.parse(manifestJson);
+		const distribute = getManifestDistribute(manifest);
+		const icons = distribute.icons || {};
+
 		const appIconPath = path.join(targetDirectory, '/app/src/main/res/');
 		const iconName = 'ic_launcher';
-		if (fs.existsSync(uniIconPath)) {
+
+		// 检查是否有自定义图标配置
+		const hasCustomIcons = Object.keys(icons).length > 0;
+
+		if (hasCustomIcons) {
 			const tips = '发现自定义图标，开始替换...'
 			const spinner = ora(tips)
 			output.warn(tips, customConsoleLog)
 			logger.info(tips)
+
+			// 删除 anydpi-v26 目录中的自适应图标 XML，改用传统 PNG/WebP 图标
 			const anydpiPath = path.join(appIconPath, '/mipmap-anydpi-v26/');
 			if (fs.existsSync(anydpiPath)) {
 				fsExtra.emptyDirSync(anydpiPath)
 				removeSyncWithRetry(anydpiPath)
 			}
-			await copyAppIcon('72')
-			await copyAppIcon('96', 'mdpi')
-			await copyAppIcon('144', 'xhdpi')
-			await copyAppIcon('192', 'xxhdpi')
-			await copyAppIcon('1024', 'xxxhdpi')
-			const roundAnydpiPath = path.join(appIconPath, '/mipmap-anydpi-v26/ic_launcher_round.xml');
-			const launcherAnydpiPath = path.join(appIconPath, '/mipmap-anydpi-v26/ic_launcher.xml');
-			if (fs.existsSync(launcherAnydpiPath) && !fs.existsSync(roundAnydpiPath)) {
-				fsExtra.copyFileSync(launcherAnydpiPath, roundAnydpiPath);
+
+			// 同时删除 drawable 中的自适应图标前景和背景 XML，避免遗留引用
+			const drawablePath = path.join(appIconPath, '/drawable/');
+			const drawableV24Path = path.join(appIconPath, '/drawable-v24/');
+			const adaptiveIconFiles = [
+				path.join(drawablePath, 'ic_launcher_background.xml'),
+				path.join(drawablePath, 'ic_launcher_foreground.xml'),
+				path.join(drawableV24Path, 'ic_launcher_foreground.xml')
+			];
+			for (const file of adaptiveIconFiles) {
+				if (fs.existsSync(file)) {
+					removeSyncWithRetry(file);
+				}
 			}
+
+			// 从 manifest.json 读取图标路径并复制到对应 mipmap 目录
+			// manifest 中的密度映射：hdpi -> mipmap-hdpi, xhdpi -> mipmap-xhdpi 等
+			const densityMapping = {
+				'hdpi': 'hdpi',
+				'xhdpi': 'xhdpi',
+				'xxhdpi': 'xxhdpi',
+				'xxxhdpi': 'xxxhdpi'
+			};
+
+			for (const [manifestDensity, mipmapDensity] of Object.entries(densityMapping)) {
+				if (icons[manifestDensity]) {
+					await copyAppIcon(icons[manifestDensity], mipmapDensity);
+				}
+			}
+
+			// 为所有密度创建 round 图标（复制自普通图标）
 			for (const hdpiType of ['ldpi', 'mdpi', 'hdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi']) {
 				const normalIconPath = path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.png`);
 				const roundIconPath = path.join(appIconPath, `/mipmap-${hdpiType}/`, 'ic_launcher_round.png');
 				const roundWebpPath = path.join(appIconPath, `/mipmap-${hdpiType}/`, 'ic_launcher_round.webp');
+				// 删除旧的 WebP round 图标
 				if (fs.existsSync(roundWebpPath)) {
 					removeSyncWithRetry(roundWebpPath);
 				}
+				// 如果普通图标存在但 round 图标不存在，复制普通图标作为 round 图标
 				if (fs.existsSync(normalIconPath) && !fs.existsSync(roundIconPath)) {
 					fsExtra.copyFileSync(normalIconPath, roundIconPath);
 				}
