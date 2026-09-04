@@ -1066,12 +1066,21 @@ async function copyAppIcon(
 	iconName = 'ic_launcher'
 ) {
 	try {
-		if (iconSourcePath && fs.existsSync(iconSourcePath)) {
+		// 解析图标路径，支持相对路径（相对于项目根目录）
+		let resolvedIconPath = iconSourcePath;
+		if (iconSourcePath && !path.isAbsolute(iconSourcePath)) {
+			resolvedIconPath = path.join(uniappProjectPath, iconSourcePath);
+		}
+
+		if (resolvedIconPath && fs.existsSync(resolvedIconPath)) {
 			const hdpiWebpPath = path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.webp`);
 			if (fs.existsSync(hdpiWebpPath)) {
 				removeSyncWithRetry(hdpiWebpPath);
 			}
-			fsExtra.copyFileSync(iconSourcePath, path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.png`));
+			fsExtra.copyFileSync(resolvedIconPath, path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.png`));
+		} else if (iconSourcePath) {
+			logger.warn(`图标文件不存在：${resolvedIconPath || iconSourcePath}`);
+			output.warn(`图标文件不存在：${resolvedIconPath || iconSourcePath}`, customConsoleLog);
 		}
 	} catch (e) {
 		throw e;
@@ -1159,6 +1168,25 @@ async function updateAppIcon() {
 			for (const [manifestDensity, mipmapDensity] of Object.entries(densityMapping)) {
 				if (icons[manifestDensity]) {
 					await copyAppIcon(icons[manifestDensity], mipmapDensity);
+				}
+			}
+
+			// 为缺失的密度提供备用图标（使用已有图标填充 ldpi 和 mdpi）
+			const availableIcon = icons['hdpi'] || icons['xhdpi'] || icons['xxhdpi'] || icons['xxxhdpi'];
+			if (availableIcon) {
+				// 确保 ldpi 存在
+				const ldpiIconPath = path.join(appIconPath, '/mipmap-ldpi/', `${iconName}.png`);
+				if (!fs.existsSync(ldpiIconPath)) {
+					await copyAppIcon(availableIcon, 'ldpi');
+					output.info('ldpi 图标缺失，已使用备用图标填充', customConsoleLog);
+					logger.info('ldpi 图标缺失，已使用备用图标填充');
+				}
+				// 确保 mdpi 存在
+				const mdpiIconPath = path.join(appIconPath, '/mipmap-mdpi/', `${iconName}.png`);
+				if (!fs.existsSync(mdpiIconPath)) {
+					await copyAppIcon(availableIcon, 'mdpi');
+					output.info('mdpi 图标缺失，已使用备用图标填充', customConsoleLog);
+					logger.info('mdpi 图标缺失，已使用备用图标填充');
 				}
 			}
 
