@@ -1073,11 +1073,15 @@ async function copyAppIcon(
 		}
 
 		if (resolvedIconPath && fs.existsSync(resolvedIconPath)) {
-			const hdpiWebpPath = path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.webp`);
+			// 确保目标 mipmap 目录存在
+			const targetMipmapDir = path.join(appIconPath, `/mipmap-${hdpiType}/`);
+			fsExtra.ensureDirSync(targetMipmapDir);
+
+			const hdpiWebpPath = path.join(targetMipmapDir, `${iconName}.webp`);
 			if (fs.existsSync(hdpiWebpPath)) {
 				removeSyncWithRetry(hdpiWebpPath);
 			}
-			fsExtra.copyFileSync(resolvedIconPath, path.join(appIconPath, `/mipmap-${hdpiType}/`, `${iconName}.png`));
+			fsExtra.copyFileSync(resolvedIconPath, path.join(targetMipmapDir, `${iconName}.png`));
 		} else if (iconSourcePath) {
 			logger.warn(`图标文件不存在：${resolvedIconPath || iconSourcePath}`);
 			output.warn(`图标文件不存在：${resolvedIconPath || iconSourcePath}`, customConsoleLog);
