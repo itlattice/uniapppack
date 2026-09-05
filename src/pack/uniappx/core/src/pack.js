@@ -2666,13 +2666,16 @@ async function updateBuildInModules() {
 				await copyAppLibs([
 					'uni-video-release.aar',
 					'ijkplayer.aar',
-					'videoplayer.aar'
+					'videoplayer.aar',
+					'uni-screenBrightness-release.aar'
 				]);
 				// 同步线上依赖
 				updateAppDependencies([
 					'com.github.bumptech.glide:glide:4.9.0',
 					'androidx.annotation:annotation:1.1.0',
-					'androidx.core:core:1.1.0'
+					'androidx.core:core:1.1.0',
+					'androidx.media3:media3-exoplayer:1.8.0',
+					'androidx.media3:media3-exoplayer-hls:1.8.0'
 				]);
 				// 组件注册
 				appBuildGradleConfig.buildFeatures.buildConfig = true;
