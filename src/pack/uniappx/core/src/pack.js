@@ -2679,6 +2679,10 @@ async function updateBuildInModules() {
 				registerComponents.push(
 					`{\\\\\\"name\\\\\\":\\\\\\"video\\\\\\",\\\\\\"class\\\\\\":\\\\\\"uts.sdk.modules.DCloudUniVideo.VideoComponent\\\\\\"}`
 				)
+				// easycom注册
+				utsEasyCom.push(
+					`{\\\\\\"class\\\\\\":\\\\\\"uts.sdk.modules.DCloudUniVideo.UniVideoExtApiComponentsRegister\\\\\\",\\\\\\"method\\\\\\":\\\\\\"register\\\\\\"}`
+				)
 			}
 			// uni-verify模块
 			if (modules['uni-verify']) {
