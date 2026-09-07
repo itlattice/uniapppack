@@ -196,7 +196,7 @@
                 <div class="formitem display-flex">
                   <div class="label">证书库密码</div>
                   <div class="packinput"  style="width: 300px">
-                    <input type="text" v-model="androidKeyPassword" style="width: 300px" placeholder="证书库密码" class="cash-input inputbox" />
+                    <input type="text" v-model="androidKeyPassword" @change="keyPasswordChange" style="width: 300px" placeholder="证书库密码" class="cash-input inputbox" />
                   </div>
                 </div>
                 <div class="formitem display-flex">
@@ -316,6 +316,12 @@ const iosBundleId=ref('');
 const iosChannel=ref('appstore');
 const iosUnionid=ref('');
 const iosInitPrivacyAuthorization=ref(true);
+
+const keyPasswordChange=()=>{
+  if(androidKeyPwd.value==''){
+    androidKeyPwd.value=androidKeyPassword.value;
+  }
+}
 
 const parseNativeLibPickFirsts = (value) => {
   return String(value || '')
