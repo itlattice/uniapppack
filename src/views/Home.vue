@@ -337,6 +337,9 @@ const keyPasswordChange=()=>{
 }
 
 const validateKeystorePassword = async () => {
+  // 先执行密码同步
+  keyPasswordChange();
+
   // 清除之前的错误提示
   keystoreValidationError.value = '';
 

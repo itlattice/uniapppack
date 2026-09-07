@@ -9,12 +9,61 @@ const sound = require('sound-play')
 // 外部依赖的变量/方法
 let mainWindow = null
 
+// 存储上次打开路径的配置文件路径
+let lastOpenPathConfigFile = null
+
 // 初始化方法（接收所有依赖）
 export function initIpcBasicHandlers({ mainWin }) {
   mainWindow = mainWin
+  // 初始化配置文件路径
+  const { app } = require('electron')
+  lastOpenPathConfigFile = path.join(app.getPath('userData'), 'lastOpenPaths.json')
   console.log('开始注册所有 IPC handler...')
   initBasicIpcHandlers()
   console.log('所有 IPC handler 注册完成')
+}
+
+/**
+ * 读取上次打开的路径
+ * @param {string} type - 路径类型：'file' 或 'folder'
+ * @returns {Promise<string|null>}
+ */
+async function getLastOpenPath(type) {
+  try {
+    if (!fsSync.existsSync(lastOpenPathConfigFile)) {
+      return null
+    }
+    const data = await fsPro.readFile(lastOpenPathConfigFile, 'utf8')
+    const paths = JSON.parse(data)
+    return paths[type] || null
+  } catch (error) {
+    console.error('读取上次打开路径失败:', error)
+    return null
+  }
+}
+
+/**
+ * 保存本次打开的路径
+ * @param {string} type - 路径类型：'file' 或 'folder'
+ * @param {string} openPath - 打开的路径
+ * @returns {Promise<void>}
+ */
+async function saveLastOpenPath(type, openPath) {
+  try {
+    let paths = {}
+    // 读取现有配置
+    if (fsSync.existsSync(lastOpenPathConfigFile)) {
+      const data = await fsPro.readFile(lastOpenPathConfigFile, 'utf8')
+      paths = JSON.parse(data)
+    }
+    // 更新路径
+    paths[type] = openPath
+    // 写入配置
+    await fsPro.writeFile(lastOpenPathConfigFile, JSON.stringify(paths, null, 2), 'utf8')
+    console.log(`保存上次打开路径 [${type}]:`, openPath)
+  } catch (error) {
+    console.error('保存上次打开路径失败:', error)
+  }
 }
 
 function initBasicIpcHandlers() {
@@ -27,14 +76,23 @@ function initBasicIpcHandlers() {
   })
   // ========== open-file-dialog ==========
   ipcMain.handle('open-file-dialog', async (event, options = {}) => {
+    // 读取上次打开的路径
+    const lastPath = await getLastOpenPath('file')
+
     const defaultOptions = {
       title: '选择文件',
-      defaultPath: app.getPath('documents'),
+      defaultPath: lastPath || app.getPath('documents'),
       properties: ['openFile'],
       filters: [],
     }
     const finalOptions = { ...defaultOptions, ...options }
     const result = await dialog.showOpenDialog(mainWindow, finalOptions)
+
+    // 如果用户选择了文件，保存路径
+    if (!result.canceled && result.filePaths.length > 0) {
+      await saveLastOpenPath('file', path.dirname(result.filePaths[0]))
+    }
+
     return {
       canceled: result.canceled,
       filePaths: result.filePaths,
@@ -117,9 +175,12 @@ function initBasicIpcHandlers() {
   })
   //选择指定扩展名的文件
   ipcMain.handle('chooseFile',async (event,ext) => {
+    // 读取上次打开的路径
+    const lastPath = await getLastOpenPath('file')
+
     const res=await dialog.showOpenDialog(mainWindow,{
       title: '选择文件',
-      defaultPath: app.getPath('documents'),
+      defaultPath: lastPath || app.getPath('documents'),
       properties: ['openFile'],
       filters: [
         { name: `${ext} 文件`, extensions: [ext] }
@@ -128,7 +189,10 @@ function initBasicIpcHandlers() {
     if (res.canceled) {
       return null
     } else {
-      return res.filePaths[0]
+      // 保存本次打开的路径（文件的目录）
+      const selectedPath = res.filePaths[0]
+      await saveLastOpenPath('file', path.dirname(selectedPath))
+      return selectedPath
     }
   })
   ipcMain.handle('read-app-file', async (event, filePath, encoding = 'utf8') => {
@@ -173,14 +237,19 @@ function initBasicIpcHandlers() {
   })
   //选择文件夹
   ipcMain.handle('choosePath', async (event, folderPath) => {
+    // 读取上次打开的路径
+    const lastPath = await getLastOpenPath('folder')
+
     const result = await dialog.showOpenDialog(mainWindow, {
       title: '选择文件夹',
-      defaultPath: folderPath || app.getPath('documents'),
+      defaultPath: lastPath || folderPath || app.getPath('documents'),
       properties: ['openDirectory'],
     })
     if (result.canceled) {
       return null
     } else {
+      // 保存本次打开的路径
+      await saveLastOpenPath('folder', result.filePaths[0])
       return result.filePaths[0]
     }
   })
