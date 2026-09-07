@@ -2,6 +2,7 @@ import { initIpcBasicHandlers } from './basic'
 import { initIpcConfigHandlers } from './config'
 import { initUniappxPackHandlers } from './uniappxPack'
 import { initUniappPackHandlers } from './uniappPack'
+import { initKeystoreValidatorHandlers } from './keystoreValidator'
 import {shell} from "electron";
 
 // 外部依赖的变量/方法
@@ -33,6 +34,10 @@ function registerAllHandlers() {
     })
     //==========配置文件相关==================
     initIpcConfigHandlers({
+      mainWin: mainWindow,
+    })
+    //==========证书验证相关==================
+    initKeystoreValidatorHandlers({
       mainWin: mainWindow,
     })
     initUniappxPackHandlers()

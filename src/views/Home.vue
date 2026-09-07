@@ -57,10 +57,15 @@
                 </div>
               </div>
               <div class="form-line display-flex">
-                <div class="formitem display-flex">
-                  <div class="label">证书库密码</div>
-                  <div class="packinput"  style="width: 300px">
-                    <input type="text" v-model="androidKeyPassword" style="width: 300px" placeholder="证书库密码" class="cash-input inputbox" />
+                <div class="formitem display-flex" style="flex-direction: column; align-items: flex-start;">
+                  <div style="display: flex; align-items: center;">
+                    <div class="label">证书库密码</div>
+                    <div class="packinput"  style="width: 300px">
+                      <input type="text" v-model="androidKeyPassword" @blur="validateKeystorePassword" style="width: 300px" placeholder="证书库密码" class="cash-input inputbox" />
+                    </div>
+                  </div>
+                  <div v-if="keystoreValidationError" class="error-tip" style="margin-left: 90px; margin-top: 4px;">
+                    {{ keystoreValidationError }}
                   </div>
                 </div>
                 <div class="formitem display-flex">
@@ -193,10 +198,15 @@
                 </div>
               </div>
               <div class="form-line display-flex">
-                <div class="formitem display-flex">
-                  <div class="label">证书库密码</div>
-                  <div class="packinput"  style="width: 300px">
-                    <input type="text" v-model="androidKeyPassword" @change="keyPasswordChange" style="width: 300px" placeholder="证书库密码" class="cash-input inputbox" />
+                <div class="formitem display-flex" style="flex-direction: column; align-items: flex-start;">
+                  <div style="display: flex; align-items: center;">
+                    <div class="label">证书库密码</div>
+                    <div class="packinput"  style="width: 300px">
+                      <input type="text" v-model="androidKeyPassword" @change="keyPasswordChange" @blur="validateKeystorePassword" style="width: 300px" placeholder="证书库密码" class="cash-input inputbox" />
+                    </div>
+                  </div>
+                  <div v-if="keystoreValidationError" class="error-tip" style="margin-left: 90px; margin-top: 4px;">
+                    {{ keystoreValidationError }}
                   </div>
                 </div>
                 <div class="formitem display-flex">
@@ -268,10 +278,13 @@ import {$packAndroidAppUniappx} from "@/common/pack";
 import Pack from "@/components/pack.vue";
 import {$closeApp} from "@/common/window";
 import {$getStorage, $setStorage} from "@/common/storage";
+import {$getConfig} from "@/common/config";
+
 const packType = ref(2)
 const props = { value: 'id', label: 'name' }
 const pageTab=ref('uniappx')
 const packRef=ref(null);
+const keystoreValidationError = ref('');
 const packTypeOptions = [
   {
     id: 1,
@@ -320,6 +333,53 @@ const iosInitPrivacyAuthorization=ref(true);
 const keyPasswordChange=()=>{
   if(androidKeyPwd.value==''){
     androidKeyPwd.value=androidKeyPassword.value;
+  }
+}
+
+const validateKeystorePassword = async () => {
+  // 清除之前的错误提示
+  keystoreValidationError.value = '';
+
+  // 检查必要的输入
+  if (!androidKeystore.value || !androidKeyPassword.value) {
+    return;
+  }
+
+  try {
+    const { ipcRenderer } = window.require('electron');
+
+    // 获取 JDK 路径
+    const config = await $getConfig();
+    const jdkPath = config?.JDKPath || '';
+
+    // 调用主进程验证证书
+    const result = await ipcRenderer.invoke('validate-keystore-password', {
+      keystorePath: androidKeystore.value,
+      password: androidKeyPassword.value,
+      jdkPath: jdkPath
+    });
+
+    if (!result.valid) {
+      // 密码错误，显示错误提示
+      keystoreValidationError.value = result.error;
+    } else {
+      // 密码正确，清除错误提示
+      keystoreValidationError.value = '';
+
+      // 如果证书别名为空且只有一个别名，自动填充
+      if (!androidKeyAlias.value && result.aliases && result.aliases.length === 1) {
+        androidKeyAlias.value = result.aliases[0];
+        console.log('自动填充证书别名:', androidKeyAlias.value);
+      } else if (!androidKeyAlias.value && result.aliases && result.aliases.length > 1) {
+        // 多个别名时，提示用户
+        console.log('证书包含多个别名:', result.aliases);
+        // 可选：这里可以使用第一个别名或显示选择框
+        androidKeyAlias.value = result.aliases[0];
+      }
+    }
+  } catch (error) {
+    console.error('验证证书时出错:', error);
+    keystoreValidationError.value = '验证证书时出错';
   }
 }
 
@@ -645,6 +705,11 @@ onMounted(()=>{
   .tips{
     font-size: 13px;
     color: red;
+  }
+  .error-tip {
+    font-size: 12px;
+    color: red;
+    line-height: 16px;
   }
   .input{
     height: 32px;
