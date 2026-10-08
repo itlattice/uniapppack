@@ -82,13 +82,16 @@ export async function $setSubjectConfig(path,config){
     return true;
 }
 
-export async function $checkAndroidConfig(){
+export async function $checkAndroidConfig(packMode='VDom'){
     var config=await $readConfig();
     console.log(config);
+    const isVaporMode = packMode === 'Vapor';
+    const sdkField = isVaporMode ? 'uniAndroidSDKVapor' : 'uniAndroidSDK';
+    const sdkVersionField = isVaporMode ? 'uniAndroidSDKVersionVapor' : 'uniAndroidSDKVersion';
     if(config.hbuildPath==undefined||config.hbuildPath==''||
       config.packPath==undefined||config.packPath==''||
-      config.uniAndroidSDK==undefined||config.uniAndroidSDK==''||
-      config.uniAndroidSDKVersion==undefined||config.uniAndroidSDKVersion==''||
+      config[sdkField]==undefined||config[sdkField]==''||
+      config[sdkVersionField]==undefined||config[sdkVersionField]==''||
       config.JDKPath==undefined||config.JDKPath==''||
       config.AndroidSDK==undefined||config.AndroidSDK==''||
       config.GradlePath==undefined||config.GradlePath==''||

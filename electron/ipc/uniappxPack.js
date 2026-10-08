@@ -2,7 +2,8 @@ import { app, ipcMain, shell } from 'electron'
 import fs from 'fs'
 import path from 'path'
 import fsExtra from 'fs-extra'
-import { spawn } from 'child_process'
+import { spawn, spawnSync } from 'child_process'
+import JSON5 from 'json5'
 
 // 这个文件是渲染层与本地 Android 打包核心之间的“唯一桥接层”。
 // 设计目标：
@@ -16,6 +17,7 @@ import { spawn } from 'child_process'
 const appRoot = app.getAppPath()
 const localCoreRoot = path.join(appRoot, 'src', 'pack', 'uniappx', 'core')
 const localPackEntry = path.join(localCoreRoot, 'src', 'pack.js')
+const localVaporPackEntry = path.join(localCoreRoot, 'src', 'pack-vapor.js')
 
 const localIosPackEntry = path.join(localCoreRoot, 'src', 'pack-ios.js')
 
@@ -57,6 +59,94 @@ function normalizePackType(packType) {
   return '1'
 }
 
+function normalizePackMode(packMode) {
+  if (packMode === 'Vapor') {
+    return 'Vapor'
+  }
+  return 'VDom'
+}
+
+function parseJavaMajorVersion(versionText) {
+  if (!versionText) {
+    return 0
+  }
+  const versionMatch = versionText.match(/version\s+"([^"]+)"/i)
+  if (!versionMatch) {
+    return 0
+  }
+  const version = versionMatch[1]
+  if (version.startsWith('1.')) {
+    const major = Number(version.split('.')[1])
+    return Number.isFinite(major) ? major : 0
+  }
+  const major = Number(version.split('.')[0])
+  return Number.isFinite(major) ? major : 0
+}
+
+function readJavaMajorVersion(javaHome) {
+  if (!javaHome) {
+    return 0
+  }
+  const javaBinary = process.platform === 'win32'
+    ? path.join(javaHome, 'bin', 'java.exe')
+    : path.join(javaHome, 'bin', 'java')
+  if (!fs.existsSync(javaBinary)) {
+    return 0
+  }
+  const result = spawnSync(javaBinary, ['-version'], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  })
+  const output = `${result.stdout || ''}${result.stderr || ''}`
+  return parseJavaMajorVersion(output)
+}
+
+function getJavaHomeCandidatesForVapor(appConfig) {
+  const candidates = []
+  if (appConfig.JDKPath) {
+    candidates.push(appConfig.JDKPath)
+  }
+  if (appConfig.javaHome) {
+    candidates.push(appConfig.javaHome)
+  }
+
+  const studioPath = appConfig.AndroidStudio || appConfig.androidStudio || ''
+  if (studioPath) {
+    const normalizedStudioPath = path.normalize(studioPath)
+    const studioDir = normalizedStudioPath.toLowerCase().endsWith('.exe')
+      ? path.dirname(path.dirname(normalizedStudioPath))
+      : normalizedStudioPath
+    candidates.push(path.join(studioDir, 'jbr'))
+    candidates.push(path.join(studioDir, 'jbr', 'Contents', 'Home'))
+  }
+
+  return Array.from(new Set(candidates.filter(Boolean)))
+}
+
+function resolveJavaHomeForPackMode(packMode, appConfig, event) {
+  const requiredJavaVersion = packMode === 'Vapor' ? 21 : 17
+  const candidates = packMode === 'Vapor'
+    ? getJavaHomeCandidatesForVapor(appConfig)
+    : [appConfig.JDKPath || appConfig.javaHome].filter(Boolean)
+
+  for (const javaHome of candidates) {
+    const major = readJavaMajorVersion(javaHome)
+    if (major >= requiredJavaVersion) {
+      if (javaHome !== appConfig.JDKPath) {
+        emitPackLog(event, `已自动切换到可用 JDK：${javaHome}（Java ${major}）`, '#e6a23c')
+      }
+      return javaHome
+    }
+  }
+
+  const currentVersion = readJavaMajorVersion(appConfig.JDKPath || appConfig.javaHome || '')
+  throw new Error(
+    `当前打包模式 ${packMode} 需要 Java ${requiredJavaVersion}+，` +
+    `但当前 JDK 版本为 ${currentVersion || '未知'}。` +
+    `请在配置中将 JDK 路径切换到 Java ${requiredJavaVersion}+（Vapor 推荐 JDK 21）。`
+  )
+}
+
 function normalizeLogMessage(message) {
   // core 里既可能直接输出字符串，也可能输出 { line, nocolor } 这类对象。
   // 渲染层日志窗口只吃纯文本，因此在主进程先做一次统一归一化。
@@ -96,12 +186,16 @@ function emitPackLog(event, message, color = 'white') {
   })
 }
 
-function getPackStart() {
-  const packModule = require(localPackEntry)
+function getPackStart(packMode = 'VDom') {
+  const packEntry = packMode === 'Vapor' ? localVaporPackEntry : localPackEntry
+  const packModule = require(packEntry)
   if (typeof packModule.start !== 'function') {
-    throw new Error(`打包入口无效：${localPackEntry}`)
+    throw new Error(`打包入口无效：${packEntry}`)
   }
-  return packModule.start
+  return {
+    start: packModule.start,
+    packEntry,
+  }
 }
 
 function getIosPackStart() {
@@ -129,15 +223,20 @@ function buildPackOptions(options, appConfig, event) {
     throw new Error('缺少 uni-app x 项目路径')
   }
 
-  const androidLocalSdk = appConfig.uniAndroidSDK || appConfig.uniAndroidSdkPath
+  const packMode = normalizePackMode(options.android?.packMode || options.packMode)
+  const androidLocalSdk = packMode === 'Vapor'
+    ? (appConfig.uniAndroidSDKVapor || appConfig.uniAndroidSdkPathVapor)
+    : (appConfig.uniAndroidSDK || appConfig.uniAndroidSdkPath)
   if (!androidLocalSdk) {
-    throw new Error('缺少 uni-app x Android 离线 SDK 路径')
+    throw new Error(`缺少 uni-app x Android 离线 SDK 路径（${packMode}）`)
   }
 
   const androidSdk = appConfig.AndroidSDK || appConfig.androidSdk || ''
   if (!androidSdk) {
     throw new Error('缺少 Android SDK 路径，请先在配置中设置 AndroidSDK')
   }
+
+  const javaHome = resolveJavaHomeForPackMode(packMode, appConfig, event)
 
   return {
     root: localCoreRoot,
@@ -148,15 +247,84 @@ function buildPackOptions(options, appConfig, event) {
     appid,
     androidLocalSdk,
     androidSdk,
-    javaHome: appConfig.JDKPath || appConfig.javaHome || '',
+    javaHome,
     androidPackageName: options.android?.androidPackName || options.androidPackageName || '',
     storePath: options.android?.androidKeystore || options.storePath || '',
     storePassword: options.android?.androidKeyPassword || options.storePassword || '',
     keyAlias: options.android?.androidKeyAlias || options.keyAlias || '',
     keyPassword: options.android?.androidKeyPwd || options.keyPassword || '',
     nativeLibPickFirsts: options.android?.nativeLibPickFirsts || options.nativeLibPickFirsts || [],
+    androidAbiFilters: Array.isArray(options.android?.abiFilters) ? options.android.abiFilters : [],
+    packMode,
     packType: normalizePackType(options.android?.packType || options.packType),
     customConsoleLog: createConsoleLog(event),
+  }
+}
+
+function ensureObject(target, key) {
+  if (!target[key] || typeof target[key] !== 'object' || Array.isArray(target[key])) {
+    target[key] = {}
+  }
+  return target[key]
+}
+
+function writeAbiFiltersToDistribute(distribute, abiFilters) {
+  if (distribute.android && typeof distribute.android === 'object' && !Array.isArray(distribute.android)) {
+    distribute.android.abiFilters = abiFilters
+    return
+  }
+  distribute.abiFilters = abiFilters
+}
+
+function applyAbiFiltersToManifest(manifestData, abiFilters) {
+  const appAndroid = ensureObject(manifestData, 'app-android')
+  const appAndroidDistribute = ensureObject(appAndroid, 'distribute')
+  writeAbiFiltersToDistribute(appAndroidDistribute, abiFilters)
+
+  const app = ensureObject(manifestData, 'app')
+  const appDistribute = ensureObject(app, 'distribute')
+  writeAbiFiltersToDistribute(appDistribute, abiFilters)
+}
+
+async function withManifestAbiFiltersOverride(packOptions, event, execute) {
+  const abiFilters = Array.isArray(packOptions.androidAbiFilters)
+    ? packOptions.androidAbiFilters.filter(item => typeof item === 'string' && item.trim())
+    : []
+  if (abiFilters.length < 1) {
+    return await execute()
+  }
+
+  const manifestPath = path.join(
+    packOptions.uniappProjectPath,
+    'unpackage',
+    'resources',
+    'app-android',
+    packOptions.appid,
+    'www',
+    'manifest.json'
+  )
+
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error(`未找到 app-android manifest.json：${manifestPath}`)
+  }
+
+  const originalManifestContent = await fs.promises.readFile(manifestPath, 'utf-8')
+  let manifestData
+  try {
+    manifestData = JSON5.parse(originalManifestContent)
+  } catch (error) {
+    throw new Error(`解析 manifest.json 失败：${manifestPath}\n${error.message}`)
+  }
+
+  applyAbiFiltersToManifest(manifestData, abiFilters)
+  const patchedManifestContent = `${JSON.stringify(manifestData, null, 2)}\n`
+  await fs.promises.writeFile(manifestPath, patchedManifestContent, 'utf-8')
+  emitPackLog(event, `已按界面配置覆盖 ABI：${abiFilters.join(', ')}`, '#e6a23c')
+
+  try {
+    return await execute()
+  } finally {
+    await fs.promises.writeFile(manifestPath, originalManifestContent, 'utf-8')
   }
 }
 
@@ -281,13 +449,16 @@ async function runGradleBuild({ projectDir, packType, javaHome, event }) {
 
 async function generateAndroidGradleProject(event, options) {
   const appConfig = readAppConfig()
-  const start = getPackStart()
   const packOptions = buildPackOptions(options, appConfig, event)
+  const { start, packEntry } = getPackStart(packOptions.packMode)
   event.sender.send('uniappx:pack-log', {
-    message: `使用核心打包入口：${localPackEntry}`,
+    message: `使用核心打包入口：${packEntry}`,
     color: 'white',
   })
-  const projectDir = await start(packOptions)
+  emitPackLog(event, `当前 Android 打包模式：${packOptions.packMode}`)
+  const projectDir = await withManifestAbiFiltersOverride(packOptions, event, async () => {
+    return await start(packOptions)
+  })
   if (!projectDir) {
     throw new Error('原生工程生成失败，未拿到输出目录')
   }

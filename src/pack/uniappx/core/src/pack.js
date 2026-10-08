@@ -136,6 +136,7 @@ let customConsoleLog = null;
 let customSetStatusMessage = null;
 let hx = null;
 let useProjectLocalSdk = false;
+let currentPackMode = 'VDom';
 
 let localPackCommand = './gradlew :app:packageDebug';
 let uniappProjectPath = DEFAULT_WORKSPACE_ROOT;
@@ -173,6 +174,52 @@ let resolvedManifestMeta = {
 };
 
 let packConfig = null;
+
+const VAPOR_REQUIRED_AARS = [
+	'app-common-release.aar',
+	'app-runtime-release.aar',
+	'breakpad-build-release.aar',
+	'uts-runtime-release.aar',
+	'ext-component-release.aar',
+	'uni-dialogPage-release.aar',
+	'uni-event-release.aar',
+	'uni-crash-release.aar',
+	'uni-getElementById-release.aar',
+	'uni-pullDownRefresh-release.aar',
+	'uni-storage-release.aar',
+	'uni-exit-release.aar',
+	'uni-theme-release.aar',
+	'uni-getAppBaseInfo-release.aar',
+	'uni-getDeviceInfo-release.aar',
+	'uni-getSystemInfo-release.aar',
+	'uni-getAccessibilityInfo-release.aar',
+	'uni-getAppAuthorizeSetting-release.aar',
+	'uni-getSystemSetting-release.aar',
+	'uni-openAppAuthorizeSetting-release.aar',
+	'uni-prompt-release.aar',
+	'uni-rpx2px-release.aar',
+	'uni-secure-network-release.aar'
+];
+
+function isVaporMode() {
+	return currentPackMode === 'Vapor';
+}
+
+function applyVaporBuildAdjustments() {
+	if (!isVaporMode()) {
+		return;
+	}
+	const vaporMinSdk = 23;
+	appBuildGradleConfig.javaVersion = '17';
+	appBuildGradleConfig.kotlinJvmTarget = '17';
+	appBuildGradleConfig.minSdkVersion = Math.max(Number(appBuildGradleConfig.minSdkVersion || 21), vaporMinSdk);
+	unixBuildGradleConfig.javaVersion = '17';
+	unixBuildGradleConfig.kotlinJvmTarget = '17';
+	unixBuildGradleConfig.minSdkVersion = Math.max(Number(unixBuildGradleConfig.minSdkVersion || 21), vaporMinSdk);
+	moduleBuildGradleConfig.javaVersion = '17';
+	moduleBuildGradleConfig.kotlinJvmTarget = '17';
+	moduleBuildGradleConfig.minSdkVersion = Math.max(Number(moduleBuildGradleConfig.minSdkVersion || 21), vaporMinSdk);
+}
 
 function loadResolvedManifestMeta() {
 	const manifestPath = path.join(appAndroidPath, APP_ID, '/www/', 'manifest.json');
@@ -345,6 +392,11 @@ function initModuleBuildGradleConfig() {
 		'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8',
 		'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8'
 	];
+	if (isVaporMode()) {
+		moduleBuildGradleConfig.javaVersion = '17';
+		moduleBuildGradleConfig.kotlinJvmTarget = '17';
+		moduleBuildGradleConfig.minSdkVersion = Math.max(Number(moduleBuildGradleConfig.minSdkVersion || 21), 23);
+	}
 }
 
 function initBuildConfig() {
@@ -391,6 +443,7 @@ function initBuildConfig() {
 			maven: []
 		}
 	}
+	currentPackMode = 'VDom';
 	utsHookClasses = new Set();
 	collectedModuleMinSdkVersions = [];
 	storePath = ''
@@ -466,6 +519,8 @@ function initConfig(options) {
 		useProjectLocalSdk = true;
 		SDK_DOWNLOAD_URL = options.androidLocalSdk;
 	}
+	currentPackMode = options?.packMode === 'Vapor' ? 'Vapor' : 'VDom';
+	applyVaporBuildAdjustments();
 
 	baseSettingsGradle.repositories.maven = [];
 	baseSettingsGradle.plugins = [];
@@ -2188,6 +2243,14 @@ async function updateBuildInModules() {
 			'plugins/uts-kotlin-compiler-plugin-0.0.1.jar',
 			'plugins/uts-kotlin-gradle-plugin-0.0.1.jar'
 		];
+		if (isVaporMode()) {
+			projectFiles.push('plugins/auto-register-gradle-plugin-1.0.0.jar');
+			await copyBuildInModuleLibs(VAPOR_REQUIRED_AARS);
+			const kspPluginDependency = 'com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.2.0-2.0.2';
+			if (!rootBuildGradleConfig.project.dependencies.default.includes(kspPluginDependency)) {
+				rootBuildGradleConfig.project.dependencies.default.push(kspPluginDependency);
+			}
+		}
 		projectFiles.map(item => {
 			if (!rootBuildGradleConfig.project.dependencies.files.includes(item)) {
 				rootBuildGradleConfig.project.dependencies.files.push(item);
@@ -2196,6 +2259,9 @@ async function updateBuildInModules() {
 		// 更新uniapp模块gradle配置
 		if (!unixBuildGradleConfig.project.plugins.includes('io.dcloud.uts.kotlin')) {
 			unixBuildGradleConfig.project.plugins.push('io.dcloud.uts.kotlin');
+		}
+		if (isVaporMode() && !unixBuildGradleConfig.project.plugins.includes('io.dcloud.uts.auto-register')) {
+			unixBuildGradleConfig.project.plugins.push('io.dcloud.uts.auto-register');
 		}
 		const generatedSourceRoot = path.join(targetDirectory, '/uniappx/src/main/java');
 		let mainConfig = normalizeModuleConfig({
@@ -3356,6 +3422,62 @@ function checkLocalResources() {
 	checkPass = true;
 }
 
+function collectFilesByExtension(rootDir, extension, output = []) {
+	if (!fsExtra.existsSync(rootDir)) {
+		return output;
+	}
+	const entries = fsExtra.readdirSync(rootDir, { withFileTypes: true });
+	for (const entry of entries) {
+		const fullPath = path.join(rootDir, entry.name);
+		if (entry.isDirectory()) {
+			collectFilesByExtension(fullPath, extension, output);
+			continue;
+		}
+		if (entry.isFile() && fullPath.endsWith(extension)) {
+			output.push(fullPath);
+		}
+	}
+	return output;
+}
+
+function detectLegacyVdomUniModuleImports(kotlinFileContent = '') {
+	return kotlinFileContent.includes('import io.dcloud.uniapp.framework.') ||
+		kotlinFileContent.includes('import io.dcloud.uniapp.vue.') ||
+		kotlinFileContent.includes('import io.dcloud.uniapp.appframe.') ||
+		kotlinFileContent.includes('import io.dcloud.uniapp.dom.');
+}
+
+function ensureVaporUniModulesCompatibility() {
+	if (!isVaporMode()) {
+		return;
+	}
+	const uniModulesRoot = path.join(appAndroidPath, 'uni_modules');
+	if (!fsExtra.existsSync(uniModulesRoot)) {
+		return;
+	}
+	const kotlinFiles = collectFilesByExtension(uniModulesRoot, '.kt');
+	const incompatibleFiles = [];
+	for (const kotlinFile of kotlinFiles) {
+		const content = fsExtra.readFileSync(kotlinFile, 'utf-8');
+		if (detectLegacyVdomUniModuleImports(content)) {
+			incompatibleFiles.push(kotlinFile);
+		}
+		if (incompatibleFiles.length >= 5) {
+			break;
+		}
+	}
+	if (incompatibleFiles.length > 0) {
+		const samplePaths = incompatibleFiles
+			.map(item => path.relative(uniappProjectPath, item))
+			.join('\n- ');
+		throw new Error(
+			`检测到当前项目 uni_modules 含 VDOM 风格 UTS 产物，和 Vapor 模式不兼容。\n` +
+			`请切换到 VDOM 模式打包，或在 HBuilderX 重新按 Vapor 方式发行本地资源后重试。\n` +
+			`示例文件：\n- ${samplePaths}`
+		);
+	}
+}
+
 /**
  * 校验SDK版本
  */
@@ -3411,10 +3533,14 @@ async function buildUnix() {
 	// 2. 根据模块与 packType 计算依赖、manifest placeholders、gradle 模板
 	// 3. 生成所有模块的 build.gradle/settings.gradle
 	// 不负责最终 assemble/package，最终编译在 startBuild -> execLocalPack。
-	await copyPlugins([
+	const projectPlugins = [
 		'uts-kotlin-compiler-plugin-0.0.1.jar',
 		'uts-kotlin-gradle-plugin-0.0.1.jar'
-	]);
+	];
+	if (isVaporMode()) {
+		projectPlugins.push('auto-register-gradle-plugin-1.0.0.jar');
+	}
+	await copyPlugins(projectPlugins);
 
 	const updateAppidMessage = customSetStatusMessage?.('开始查找替换应用ID...');
 	const updateAppidSpinner = ora('开始查找替换应用ID...').start();
@@ -3633,11 +3759,13 @@ async function start(options = {}) {
 		output.info(`当前SDK模式：${useProjectLocalSdk ? '直接使用配置目录' : '使用本地缓存/下载模式'}`, customConsoleLog);
 		output.info(`当前离线SDK：${baseLocalSdk.localSdk || '未配置'}`, customConsoleLog);
 		output.info(`当前JDK：${baseLocalSdk.javaHome || options.javaHome || '未配置'}`, customConsoleLog);
+		output.info(`当前渲染模式：${currentPackMode}`, customConsoleLog);
 		output.info('当前打包模式：仅生成Gradle工程，不执行Gradle编译', customConsoleLog);
 		// initConfig 会按 packType 重建路径、Gradle 命令和部分运行时状态；
 		// 调试基座/正式包差异时，这里是最先需要确认的切换点。
 		initConfig(options);
 		checkLocalResources();
+		ensureVaporUniModulesCompatibility();
 		if (!checkPass) return;
 		
 		logger.info('开始校验SDK版本...');

@@ -77,7 +77,31 @@
               </div>
               <div class="form-line display-flex">
                 <div class="formitem display-flex" style="width: 100%; align-items: flex-start;">
-                  <div class="label">原生库冲突处理</div>
+                  <div class="label">CPU架构</div>
+                  <div class="packinput" style="width: 580px">
+                    <el-checkbox-group v-model="abiFilters">
+                      <el-checkbox label="arm64-v8a" value="arm64-v8a" size="small" />
+                      <el-checkbox label="armeabi-v7a" value="armeabi-v7a" size="small" />
+                      <el-checkbox label="x86_64" value="x86_64" size="small" />
+                      <el-checkbox label="x86" value="x86" size="small" />
+                    </el-checkbox-group>
+                  </div>
+                </div>
+              </div>
+              <div class="form-line display-flex">
+                <div class="formitem display-flex" style="width: 100%; align-items: flex-start;">
+                  <div class="label">打包模式</div>
+                  <div class="packinput" style="width: 580px">
+                    <el-radio-group v-model="packMode">
+                      <el-radio value="VDom">VDOM模式</el-radio>
+                      <el-radio value="Vapor">蒸汽模式</el-radio>
+                    </el-radio-group>
+                  </div>
+                </div>
+              </div>
+              <div class="form-line display-flex">
+                <div class="formitem display-flex" style="width: 100%; align-items: flex-start;">
+                  <div class="label">原生库冲突</div>
                   <div class="packinput" style="width: 580px">
                     <input
                       type="text"
@@ -285,6 +309,10 @@ const props = { value: 'id', label: 'name' }
 const pageTab=ref('uniappx')
 const packRef=ref(null);
 const keystoreValidationError = ref('');
+
+const abiFilters=ref(['arm64-v8a','x86_64']);
+const packMode=ref('VDom');
+
 const packTypeOptions = [
   {
     id: 1,
@@ -407,6 +435,8 @@ const readSubjectConfig=async (path)=>{
     androidKeyPassword.value='';
     androidKeyPwd.value='';
     androidNativeLibPickFirsts.value='';
+    abiFilters.value=['arm64-v8a','x86_64'];
+    packMode.value='VDom';
   } else {
     androidPackName.value=subject.android.androidPackName;
     androidKeystore.value=subject.android.androidKeystore;
@@ -414,6 +444,10 @@ const readSubjectConfig=async (path)=>{
     androidKeyPassword.value=subject.android.androidKeyPassword;
     androidKeyPwd.value=subject.android.androidKeyPwd;
     androidNativeLibPickFirsts.value=(subject.android.nativeLibPickFirsts || []).join(', ');
+    abiFilters.value=Array.isArray(subject.android.abiFilters) && subject.android.abiFilters.length > 0
+      ? subject.android.abiFilters
+      : ['arm64-v8a','x86_64'];
+    packMode.value=subject.android.packMode === 'Vapor' ? 'Vapor' : 'VDom';
   }
   if(!subject.ios){
     iosBundleId.value='';
@@ -450,6 +484,7 @@ const chooseSubjectPath=async ()=>{
 
 const androidPackStart=async ()=>{
   subjectBasicData.value.packPlatform='android'
+  subjectBasicData.value.appType='uniappx'
   subjectBasicData.value.android={
     path:subjectPath.value,
     packType:packType.value,
@@ -458,7 +493,9 @@ const androidPackStart=async ()=>{
     androidKeyAlias:androidKeyAlias.value,
     androidKeyPassword:androidKeyPassword.value,
     androidKeyPwd:androidKeyPwd.value,
-    nativeLibPickFirsts:parseNativeLibPickFirsts(androidNativeLibPickFirsts.value)
+    nativeLibPickFirsts:parseNativeLibPickFirsts(androidNativeLibPickFirsts.value),
+    abiFilters:abiFilters.value,
+    packMode:packMode.value,
   }
   if(subjectPath.value==''){
     $toastError('请选择项目位置');
@@ -475,7 +512,7 @@ const androidPackStart=async ()=>{
   var loading=$showLoading('打包中，请稍等');
   $setSubjectConfig(subjectPath.value,subjectBasicData.value);
   console.log(subjectBasicData.value);
-  var check=await $checkAndroidConfig();
+  var check=await $checkAndroidConfig(packMode.value);
   if(!check){
     $toastError("请先完成Android打包环境配置")
     $hideLoading(loading)

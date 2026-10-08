@@ -29,6 +29,8 @@
 ### Android 打包环境
 
 - **HBuilderX**: 包含 uni-app x 离线 SDK
+- **uni-app x 离线 SDK（VDOM）**: 用于 VDOM 模式打包
+- **uni-app x 离线 SDK（Vapor）**: 用于蒸汽模式打包
 - **Android SDK**: 包含构建工具和平台工具
 - **JDK**: 推荐 JDK 17
 - **Gradle**: 用于 Android 项目构建
@@ -80,6 +82,9 @@ npm run electron:build
 
    - 选择项目目录
    - 填写包名/Bundle ID、证书信息
+   - Uniappx Android 可选择 VDOM / Vapor 打包模式，分别使用配置页对应的离线 SDK
+   - Uniappx Android 的 CPU 架构以界面勾选为准（打包时临时覆盖 app-android manifest 配置）
+   - Vapor 模式会按官方要求启用 Java/Kotlin 17、auto-register 插件，并补齐基础 AAR 组件（如 ext-component、uni-dialogPage、uni-secure-network）
    - 点击"打包"或"生成工程"按钮
 
 ## 🛠 开发说明

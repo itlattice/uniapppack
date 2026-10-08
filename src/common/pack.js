@@ -11,15 +11,17 @@ function toPlainPackConfig(config) {
     return JSON.parse(JSON.stringify(config || {}))
 }
 
-async function checkAndroidSDK(){
+async function checkAndroidSDK(packMode='VDom'){
     var config=await $readConfig();
-    if(!(await $pathExists(config.uniAndroidSDK))){
+    const isVaporMode = packMode === 'Vapor';
+    const sdkPath = isVaporMode ? config.uniAndroidSDKVapor : config.uniAndroidSDK;
+    if(!(await $pathExists(sdkPath))){
         callLog("错误：Uniapp离线AndroidSDK包不存在，请检查");
         return false;
     }
-    var sdkPath=config.uniAndroidSDK+"/SDK/libs";
-    var pluginPath=config.uniAndroidSDK+"/plugins";
-    if(!(await $pathExists(sdkPath))){
+    var sdkLibsPath=sdkPath+"/SDK/libs";
+    var pluginPath=sdkPath+"/plugins";
+    if(!(await $pathExists(sdkLibsPath))){
         callLog("错误：Uniapp离线AndroidSDK包不完整，请检查");
         return false;
     }
@@ -38,7 +40,7 @@ async function checkAndroidSDK(){
 export async function $packAndroidAppUniappx(config,pushLog){
     callLog=pushLog;
     const plainConfig = toPlainPackConfig(config)
-    let check=await checkAndroidSDK(); //检查离线SDK情况
+    let check=await checkAndroidSDK(plainConfig?.android?.packMode); //检查离线SDK情况
     if(!check){
         return false;
     }

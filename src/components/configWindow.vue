@@ -31,7 +31,7 @@
           <div class="formdata">
             <div class="formline display-flex" style="height: 50px;margin-top: 10px;">
               <div class="formitem display-flex">
-                <div class="label unselectable">安卓离线SDK地址</div>
+                <div class="label unselectable">离线SDK地址(VDOM)</div>
                 <div class="inputbox">
                   <input type="text" v-model="uniAndroidSDK" readonly placeholder="离线SDK地址" class="cash-input input" />
                   <div class="tips">下载完毕后解压后把解压后的文件夹放置于此，<a href="https://doc.dcloud.net.cn/uni-app-x/native/download/android.html" target="_blank">下载地址</a></div>
@@ -42,6 +42,22 @@
                 <div class="label unselectable" style="width: 50px">版本号</div>
                 <div class="inputbox" style="width: 100px;">
                   <input type="text" placeholder="SDK版本号" v-model="uniAndroidSDKVersion" style="width: 100px;" class="cash-input input" />
+                </div>
+              </div>
+            </div>
+            <div class="formline display-flex" style="height: 50px;margin-top: 10px;">
+              <div class="formitem display-flex">
+                <div class="label unselectable">离线SDK地址(Vapor)</div>
+                <div class="inputbox">
+                  <input type="text" v-model="uniAndroidSDKVapor" readonly placeholder="离线SDK地址" class="cash-input input" />
+                  <div class="tips">下载完毕后解压后把解压后的文件夹放置于此，<a href="https://doc.dcloud.net.cn/uni-app-x/native/download/android.html" target="_blank">下载地址</a></div>
+                </div>
+                <button class="cash-btn selectbtn" @click="chooseUniAndroidSDKVapor">选择位置</button>
+              </div>
+              <div class="formitem display-flex">
+                <div class="label unselectable" style="width: 50px">版本号</div>
+                <div class="inputbox" style="width: 100px;">
+                  <input type="text" placeholder="SDK版本号" v-model="uniAndroidSDKVersionVapor" style="width: 100px;" class="cash-input input" />
                 </div>
               </div>
             </div>
@@ -130,6 +146,8 @@ const hbuildPath=ref('')
 const packPath=ref('')
 const uniAndroidSDK=ref('')
 const uniAndroidSDKVersion=ref('');
+const uniAndroidSDKVapor=ref('')
+const uniAndroidSDKVersionVapor=ref('');
 const AndroidSDK=ref('')
 const JDKPath=ref('')
 const GradlePath=ref('')
@@ -150,6 +168,8 @@ const showWindow= async ()=>{
   packPath.value=config.packPath||'';
   uniAndroidSDK.value=config.uniAndroidSDK||'';
   uniAndroidSDKVersion.value=config.uniAndroidSDKVersion||'';
+  uniAndroidSDKVapor.value=config.uniAndroidSDKVapor||'';
+  uniAndroidSDKVersionVapor.value=config.uniAndroidSDKVersionVapor||'';
   AndroidSDK.value=config.AndroidSDK||'';
   JDKPath.value=config.JDKPath||'';
   GradlePath.value=config.GradlePath||'';
@@ -164,6 +184,8 @@ const hideWindow=()=>{
   packPath.value=""
   uniAndroidSDK.value=""
   uniAndroidSDKVersion.value=""
+  uniAndroidSDKVapor.value=""
+  uniAndroidSDKVersionVapor.value=""
   AndroidSDK.value=""
   JDKPath.value=""
   GradlePath.value=""
@@ -201,6 +223,18 @@ const chooseUniAndroidSDK=async ()=>{
     uniAndroidSDKVersion.value=versionMatch[1];
   }
 }
+
+const chooseUniAndroidSDKVapor=async ()=>{
+  let path=await $choosePath();
+  if(!path) return ;
+  uniAndroidSDKVapor.value=path;
+  const versionMatch = path.match(/(\d+\.\d+)/);
+  if (versionMatch) {
+    console.log('识别的版本号:', versionMatch[1]); // 输出: 5.07
+    uniAndroidSDKVersionVapor.value=versionMatch[1];
+  }
+}
+
 const choosePackPath=async ()=>{
   let path=await $choosePath();
   if(!path) return ;
@@ -253,7 +287,9 @@ const confirmConfig=async ()=>{
     hbuildPath:hbuildPath.value,
     packPath:packPath.value,
     uniAndroidSDK:uniAndroidSDK.value,
+    uniAndroidSDKVapor:uniAndroidSDKVapor.value,
     uniAndroidSDKVersion:uniAndroidSDKVersion.value,
+    uniAndroidSDKVersionVapor:uniAndroidSDKVersionVapor.value,
     JDKPath:JDKPath.value,
     AndroidSDK:AndroidSDK.value,
     GradlePath:GradlePath.value,

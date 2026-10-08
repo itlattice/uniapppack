@@ -135,8 +135,8 @@ android {
 	    abortOnError false
 	}
 	compileOptions {
-	    sourceCompatibility JavaVersion.VERSION_1_8
-	    targetCompatibility JavaVersion.VERSION_1_8
+	    sourceCompatibility JavaVersion.VERSION_{{javaVersion}}
+	    targetCompatibility JavaVersion.VERSION_{{javaVersion}}
 	}
 
     {{#if packagingHasJniLibs}}
@@ -172,7 +172,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '{{kotlinJvmTarget}}'
     }
 	{{/if}}
 

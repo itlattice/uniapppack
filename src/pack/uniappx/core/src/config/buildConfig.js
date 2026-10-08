@@ -86,6 +86,8 @@ function getBaseBuildConfig () {
 			maven: []
 		},
 		applyPlugins: [],
+		javaVersion: '1_8',
+		kotlinJvmTarget: '1.8',
 		localPack: true,
 		keyStore: {
 			storePassword: STORE_PASSWORD,
