@@ -197,6 +197,8 @@ const VAPOR_REQUIRED_AARS = [
 	'uni-getSystemSetting-release.aar',
 	'uni-openAppAuthorizeSetting-release.aar',
 	'uni-prompt-release.aar',
+	'uni-showLoading-release.aar',
+	'uni-loading-release.aar',
 	'uni-rpx2px-release.aar',
 	'uni-secure-network-release.aar'
 ];
@@ -219,6 +221,26 @@ function applyVaporBuildAdjustments() {
 	moduleBuildGradleConfig.javaVersion = '17';
 	moduleBuildGradleConfig.kotlinJvmTarget = '17';
 	moduleBuildGradleConfig.minSdkVersion = Math.max(Number(moduleBuildGradleConfig.minSdkVersion || 21), vaporMinSdk);
+	enableNativeLibPickFirst('META-INF/uniappx/auto-register/*.properties');
+	appBuildGradleConfig.enableAutoRegisterProcessor = true;
+	unixBuildGradleConfig.enableAutoRegisterProcessor = true;
+	if (!Array.isArray(appBuildGradleConfig.applyPlugins)) {
+		appBuildGradleConfig.applyPlugins = [];
+	}
+	pushUniqueString(appBuildGradleConfig.applyPlugins, 'io.dcloud.uts.auto-register');
+	if (!appBuildGradleConfig.aaptOptions || typeof appBuildGradleConfig.aaptOptions !== 'object') {
+		appBuildGradleConfig.aaptOptions = {
+			additionalParameters: ['--auto-add-overlay'],
+			ignoreAssetsPattern: '!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~',
+			noCompress: []
+		};
+	}
+	if (!Array.isArray(appBuildGradleConfig.aaptOptions.noCompress)) {
+		appBuildGradleConfig.aaptOptions.noCompress = [];
+	}
+	['js', 'json', 'mjs', 'cjs'].forEach((ext) => {
+		pushUniqueString(appBuildGradleConfig.aaptOptions.noCompress, ext);
+	});
 }
 
 function loadResolvedManifestMeta() {
@@ -1051,11 +1073,19 @@ async function updateAppid(oraSpinner) {
 		}
 
 		// 生成修改后的 XML 字符串
-		const updatedXML = new xmldom.XMLSerializer().serializeToString(doc);
+		let updatedXML = new xmldom.XMLSerializer().serializeToString(doc);
+		updatedXML = normalizeManifestRuntimeClasses(updatedXML, true);
 		// 写回 AndroidManifest.xml 文件
 		await fs.promises.writeFile(manifestPath, xmlFormatter(updatedXML), {
 			encoding: 'utf8',
 		});
+
+		const appAndroidManifestPath = path.join(targetDirectory, '/app/src/main/AndroidManifest.xml');
+		if (fs.existsSync(appAndroidManifestPath)) {
+			const appManifestRaw = await fs.promises.readFile(appAndroidManifestPath, 'utf-8');
+			const normalizedAppManifest = normalizeManifestRuntimeClasses(appManifestRaw, false);
+			await fs.promises.writeFile(appAndroidManifestPath, normalizedAppManifest, { encoding: 'utf8' });
+		}
 
 		// 判断项目根目录是否存在AndroidManifest.xml文件
 		const projectAndroidManifestPath = path.join(uniappProjectPath, 'AndroidManifest.xml');
@@ -1064,7 +1094,6 @@ async function updateAppid(oraSpinner) {
 			const spinner = ora(tips)
 			output.warn(tips, customConsoleLog)
 			logger.info(tips)
-			const appAndroidManifestPath = path.join(targetDirectory, '/app/src/main/AndroidManifest.xml');
 			await deleteFile(appAndroidManifestPath);
 			fsExtra.copySync(projectAndroidManifestPath, path.join(targetDirectory,
 				'/app/src/main/AndroidManifest.xml'));
@@ -1076,6 +1105,7 @@ async function updateAppid(oraSpinner) {
 				appManifestContent = xmlFormatter(new xmldom.XMLSerializer().serializeToString(appManifestDoc));
 			}
 			appManifestContent = ensureApplicationDisplayAttributes(appManifestContent, resolvedAppName);
+			appManifestContent = normalizeManifestRuntimeClasses(appManifestContent, false);
 			await fs.promises.writeFile(appAndroidManifestPath, appManifestContent, { encoding: 'utf8' });
 			await syncAppNameResources(resolvedAppName);
 			applyDynamicManifestPlaceholders(appManifestContent);
@@ -1268,9 +1298,45 @@ async function updateAppIcon() {
 			output.success(completeTips, customConsoleLog)
 			logger.info(completeTips)
 		}
+		await ensureRoundIconResourceOrFallback();
 	} catch (e) {
 		throw e;
 	}
+}
+
+async function ensureRoundIconResourceOrFallback() {
+	const appIconPath = path.join(targetDirectory, '/app/src/main/res/');
+	const iconCandidates = [];
+	const densityFolders = ['ldpi', 'mdpi', 'hdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi'];
+	for (const density of densityFolders) {
+		iconCandidates.push(path.join(appIconPath, `mipmap-${density}`, 'ic_launcher_round.png'));
+		iconCandidates.push(path.join(appIconPath, `mipmap-${density}`, 'ic_launcher_round.webp'));
+	}
+	iconCandidates.push(path.join(appIconPath, 'mipmap-anydpi-v26', 'ic_launcher_round.xml'));
+
+	const hasRoundIcon = iconCandidates.some(iconPath => fs.existsSync(iconPath));
+	if (hasRoundIcon) {
+		return;
+	}
+
+	const manifestPath = path.join(targetDirectory, '/app/src/main/AndroidManifest.xml');
+	if (!fs.existsSync(manifestPath)) {
+		return;
+	}
+	const manifestContent = await fs.promises.readFile(manifestPath, 'utf-8');
+	const appManifestDoc = new xmldom.DOMParser().parseFromString(manifestContent);
+	const applicationNode = appManifestDoc.getElementsByTagName('application')?.[0];
+	if (!applicationNode) {
+		return;
+	}
+	applicationNode.setAttribute('android:roundIcon', '@mipmap/ic_launcher');
+	await fs.promises.writeFile(
+		manifestPath,
+		xmlFormatter(new xmldom.XMLSerializer().serializeToString(appManifestDoc)),
+		{ encoding: 'utf8' }
+	);
+	output.warn('未检测到 ic_launcher_round，已自动回退使用默认图标 ic_launcher', customConsoleLog);
+	logger.warn('未检测到 ic_launcher_round，已自动回退使用默认图标 ic_launcher');
 }
 
 async function batchCopyNativeResourcesIcon() {
@@ -1347,9 +1413,26 @@ async function updateUnixSrc(oraSpinner) {
 		// 拷贝libs
 		await copyUnixLibs(libs);
 		const unixMainDirectory = path.join(targetDirectory, '/uniappx/src/main/java');
-		fsExtra.emptyDirSync(unixMainDirectory);
-		fsExtra.copySync(path.join(unixAndroidPath, '/src/'), path.join(targetDirectory,
-		'/uniappx/src/main/java/'));
+		const unixSrcCandidates = [
+			path.join(unixAndroidPath, 'src'),
+			path.join(appAndroidPath, 'src'),
+			path.join(appAndroidPath, APP_ID || '', 'src'),
+			path.join(appAndroidPath, APP_ID || '', 'www', 'src'),
+			path.join(appAndroidPath, APP_ID || '', 'www', 'uniappx', 'app-android', 'src')
+		].filter(Boolean);
+		const resolvedUnixSrcPath = unixSrcCandidates.find(candidate => fsExtra.existsSync(candidate));
+		if (resolvedUnixSrcPath) {
+			fsExtra.emptyDirSync(unixMainDirectory);
+			fsExtra.copySync(resolvedUnixSrcPath, path.join(targetDirectory, '/uniappx/src/main/java/'));
+			output.info(`已使用项目 uniappx 源码目录：${resolvedUnixSrcPath}`, customConsoleLog);
+		} else {
+			output.warn(
+				`未发现项目 uniappx 源码目录（已检查 ${unixSrcCandidates.join(' ; ')}），` +
+				'将保留基础模板中的 uniappx/src/main/java 代码继续打包。',
+				customConsoleLog
+			);
+		}
+		ensureUniappxKspSourceAnchor(unixMainDirectory);
 
 		// 设置包名
 		unixBuildGradleConfig.packageName = 'cn.uvuejs.uniappx'
@@ -1363,6 +1446,24 @@ async function updateUnixSrc(oraSpinner) {
 		console.error(e);
 		throw e;
 	}
+}
+
+function ensureUniappxKspSourceAnchor(unixMainDirectory) {
+	if (!isVaporMode()) {
+		return;
+	}
+	const kotlinSources = getKotlinFiles(unixMainDirectory);
+	if (kotlinSources.length > 0) {
+		return;
+	}
+	fsExtra.ensureDirSync(unixMainDirectory);
+	const anchorPath = path.join(unixMainDirectory, 'AutoRegisterKspAnchor.kt');
+	const anchorSource = `package cn.uvuejs.uniappx
+
+internal object AutoRegisterKspAnchor
+`;
+	fsExtra.writeFileSync(anchorPath, anchorSource, 'utf8');
+	output.info('未检测到 uniappx Kotlin 源码，已自动生成 KSP 锚点文件以启用 auto-register 代码生成', customConsoleLog);
 }
 
 function toCamelCase(str) {
@@ -1517,8 +1618,55 @@ function normalizeFinalMinSdk() {
 	}
 }
 
+function getUniRuntimeClassNames() {
+	if (isVaporMode()) {
+		return {
+			application: 'io.dcloud.uniappxv.UniApplication',
+			activity: 'io.dcloud.uniappxv.UniAppActivity',
+			launchProxyActivity: 'io.dcloud.uniappxv.UniLaunchProxyActivity'
+		};
+	}
+	return {
+		application: 'io.dcloud.uniapp.UniApplication',
+		activity: 'io.dcloud.uniapp.UniAppActivity',
+		launchProxyActivity: 'io.dcloud.uniapp.UniLaunchProxyActivity'
+	};
+}
+
+function normalizeManifestRuntimeClasses(manifestContent = '', ensureApplicationName = false) {
+	const runtimeClasses = getUniRuntimeClassNames();
+	const appManifestDoc = new xmldom.DOMParser().parseFromString(manifestContent);
+	const applicationNode = appManifestDoc.getElementsByTagName('application')?.[0];
+	if (!applicationNode) {
+		return manifestContent;
+	}
+	const oldApplicationNames = ['io.dcloud.uniapp.UniApplication', 'io.dcloud.uniappxv.UniApplication'];
+	const oldActivityNames = ['io.dcloud.uniapp.UniAppActivity', 'io.dcloud.uniappxv.UniAppActivity'];
+	const oldLaunchProxyNames = ['io.dcloud.uniapp.UniLaunchProxyActivity', 'io.dcloud.uniappxv.UniLaunchProxyActivity'];
+
+	const appName = applicationNode.getAttribute('android:name');
+	if (ensureApplicationName || oldApplicationNames.includes(appName)) {
+		applicationNode.setAttribute('android:name', runtimeClasses.application);
+	}
+
+	const activities = applicationNode.getElementsByTagName('activity');
+	for (let index = 0; index < activities.length; index += 1) {
+		const activityNode = activities[index];
+		const activityName = activityNode.getAttribute('android:name');
+		if (oldActivityNames.includes(activityName)) {
+			activityNode.setAttribute('android:name', runtimeClasses.activity);
+		}
+		if (oldLaunchProxyNames.includes(activityName)) {
+			activityNode.setAttribute('android:name', runtimeClasses.launchProxyActivity);
+		}
+	}
+
+	return xmlFormatter(new xmldom.XMLSerializer().serializeToString(appManifestDoc));
+}
+
 function ensureApplicationDisplayAttributes(appManifestContent, appName = '') {
 	const appManifestDoc = new xmldom.DOMParser().parseFromString(appManifestContent);
+	const runtimeClasses = getUniRuntimeClassNames();
 	const applicationNode = appManifestDoc.getElementsByTagName('application')?.[0];
 	if (!applicationNode) {
 		return appManifestContent;
@@ -1532,14 +1680,14 @@ function ensureApplicationDisplayAttributes(appManifestContent, appName = '') {
 	let launchProxyActivity = null;
 	for (let index = 0; index < activities.length; index += 1) {
 		const activityNode = activities[index];
-		if (activityNode.getAttribute('android:name') === 'io.dcloud.uniapp.UniLaunchProxyActivity') {
+		if (activityNode.getAttribute('android:name') === runtimeClasses.launchProxyActivity) {
 			launchProxyActivity = activityNode;
 			break;
 		}
 	}
 	if (!launchProxyActivity) {
 		const activityNode = appManifestDoc.createElement('activity');
-		activityNode.setAttribute('android:name', 'io.dcloud.uniapp.UniLaunchProxyActivity');
+		activityNode.setAttribute('android:name', runtimeClasses.launchProxyActivity);
 		activityNode.setAttribute('android:exported', 'true');
 		launchProxyActivity = activityNode;
 		applicationNode.appendChild(activityNode);
@@ -1585,7 +1733,10 @@ function ensureApplicationDisplayAttributes(appManifestContent, appName = '') {
 			applicationNode.appendChild(aliasNode);
 		}
 	}
-	return xmlFormatter(new xmldom.XMLSerializer().serializeToString(appManifestDoc));
+	return normalizeManifestRuntimeClasses(
+		xmlFormatter(new xmldom.XMLSerializer().serializeToString(appManifestDoc)),
+		false
+	);
 }
 
 function enableNativeLibPickFirst(pattern) {
@@ -2167,6 +2318,43 @@ async function copyPlugins(plugins) {
 		logger.warn(e.stack);
 		throw e;
 	}
+}
+
+function ensureLocalAutoRegisterProcessorMavenRepo() {
+	if (!isVaporMode()) {
+		return;
+	}
+	const processorJarPath = path.join(targetDirectory, 'plugins', 'auto-register-processor-1.0.0.jar');
+	if (!fsExtra.existsSync(processorJarPath)) {
+		throw new Error(`缺少 Vapor 必需插件：${processorJarPath}`);
+	}
+	const mavenArtifactDir = path.join(
+		targetDirectory,
+		'plugins',
+		'm2',
+		'io',
+		'dcloud',
+		'uts',
+		'auto-register-processor',
+		'1.0.0'
+	);
+	fsExtra.ensureDirSync(mavenArtifactDir);
+	const targetJarPath = path.join(mavenArtifactDir, 'auto-register-processor-1.0.0.jar');
+	fsExtra.copySync(processorJarPath, targetJarPath, { overwrite: true });
+	const pomPath = path.join(mavenArtifactDir, 'auto-register-processor-1.0.0.pom');
+	const pomContent = `<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.dcloud.uts</groupId>
+  <artifactId>auto-register-processor</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+</project>
+`;
+	fsExtra.writeFileSync(pomPath, pomContent, 'utf8');
+	output.info(`已就地创建 auto-register-processor 本地 Maven 仓库：${mavenArtifactDir}`, customConsoleLog);
 }
 
 /**
@@ -3539,8 +3727,10 @@ async function buildUnix() {
 	];
 	if (isVaporMode()) {
 		projectPlugins.push('auto-register-gradle-plugin-1.0.0.jar');
+		projectPlugins.push('auto-register-processor-1.0.0.jar');
 	}
 	await copyPlugins(projectPlugins);
+	ensureLocalAutoRegisterProcessorMavenRepo();
 
 	const updateAppidMessage = customSetStatusMessage?.('开始查找替换应用ID...');
 	const updateAppidSpinner = ora('开始查找替换应用ID...').start();

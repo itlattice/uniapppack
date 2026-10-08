@@ -5,6 +5,9 @@ plugins {
     id '{{this}}'
     {{/each}}
 }
+{{#if enableAutoRegisterProcessor}}
+apply plugin: 'com.google.devtools.ksp'
+{{/if}}
 
 android {
     {{#if packageName}}
@@ -77,7 +80,10 @@ dependencies {
 	
 	implementation("net.lingala.zip4j:zip4j:2.11.5")
 	implementation("androidx.webkit:webkit:1.6.0")
-    {{#each dependencies.scopedDefault}}
+	{{#if enableAutoRegisterProcessor}}
+	ksp("io.dcloud.uts:auto-register-processor:1.0.0")
+	{{/if}}
+	{{#each dependencies.scopedDefault}}
     {{scope}} '{{value}}'
     {{/each}}
     {{#each dependencies.project}}

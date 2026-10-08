@@ -86,6 +86,7 @@ function getBaseBuildConfig () {
 			maven: []
 		},
 		applyPlugins: [],
+		enableAutoRegisterProcessor: false,
 		javaVersion: '1_8',
 		kotlinJvmTarget: '1.8',
 		localPack: true,

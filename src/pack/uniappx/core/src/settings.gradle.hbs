@@ -17,6 +17,7 @@ dependencyResolutionManagement {
         flatDir {
             dirs('./plugins/')
         }
+        maven { url = uri("./plugins/m2") }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
